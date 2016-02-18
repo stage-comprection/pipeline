@@ -1,8 +1,9 @@
 # Compiler options
 CC = g++
-OPTCFLAGS= -Ofast -march=native
-CFLAGS= -Wall -Werror -std=c++11 $(OPTCFLAGS)
+OPTCFLAGS= -Ofast -march=native 
+CFLAGS= -Wall -Werror -std=c++11 -I $(LIBPATH) $(OPTCFLAGS)
 LDFLAGS= -pthread
+LIBPATH = ../utils/src
 
 # Directory organisation
 BASEDIR = .
@@ -13,16 +14,22 @@ BIN = $(BASEDIR)/bin
 # Program name
 TARGET = filter_sam_output
 
+# Objects names
+OBJECTS = $(BUILD)/filter_sam_output.o $(BUILD)/utils.o
+
 # Rules
 
 all: init $(TARGET)
 
-$(TARGET): $(BUILD)/$(TARGET).o
-	$(CC) $(CFLAGS) -o $(BIN)/$(TARGET) $^
+$(TARGET): $(OBJECTS)
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $(BIN)/$(TARGET) $^ 
+	cp $(BIN)/$(TARGET) ../../binaries/$(TARGET)
 
 $(BUILD)/%.o: $(SRC)/%.cpp
 	$(CC) $(CFLAGS) -c -o $@ $^
 
+$(BUILD)/utils.o: $(LIBPATH)/utils.cpp
+	$(CC) $(CFLAGS) -c -o $@ $^
 
 clean:
 	rm -rf $(BUILD)/*.o

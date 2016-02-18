@@ -25,19 +25,19 @@ data = {'readsPath': '/home/rferon/project/data/reads/',
 
 
 # Bowtie parameters
-bowtie = {'path': './binaries/',
+bowtie = {'path': './ext/bowtie/',
           'output_file': 'bowtie_',
           'nMismatches': 3}
 
 
 # Bloocoo parameters
-bloocoo = {'path': './binaries/',
+bloocoo = {'path': './ext/bloocoo/',
            'kmerSize': 31,
            'abundanceThreshold': 5}
 
 
 # Musket parameters
-musket = {'path': './binaries/',
+musket = {'path': './ext/musket/',
           'kmerSize': 31}
 
 
@@ -48,8 +48,8 @@ dbg_correction = {'path': './binaries/',
                   'abundanceThresholdBcalm': 5,
                   'abundanceThresholdBgreat': 5,
                   'settingsFile': 'correction_settings.ini',
-                  'pathToBcalm': '',
-                  'pathToBgreat': ''}
+                  'pathToBcalm': '../ext/bcalm/',
+                  'pathToBgreat': '../ext/bgreat/'}
 
 
 # Evaluation parameters

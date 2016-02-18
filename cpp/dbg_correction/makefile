@@ -12,17 +12,17 @@ BUILD = $(BASEDIR)/build
 BIN = $(BASEDIR)/bin
 
 # Program name
-TARGET = format_reads_file
+TARGET = dbg_correction
 
 # Objects names
-OBJECTS = $(BUILD)/format_reads_file.o
+OBJECTS = $(BUILD)/dbg_correction.o $(BUILD)/map_to_reference.o $(BUILD)/pipeline.o $(BUILD)/run_binaries.o $(BUILD)/settings.o $(BUILD)/utils.o
 
 # Rules
 
 all: init $(TARGET)
 
 $(TARGET): $(OBJECTS)
-	$(CC) $(CFLAGS) $(LDFLAGS) -o $(BIN)/$(TARGET) $^ 
+	$(CC) $(CFLAGS) -o $(BIN)/$(TARGET) $^
 	cp $(BIN)/$(TARGET) ../../binaries/$(TARGET)
 
 $(BUILD)/%.o: $(SRC)/%.cpp

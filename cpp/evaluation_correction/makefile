@@ -12,10 +12,10 @@ BUILD = $(BASEDIR)/build
 BIN = $(BASEDIR)/bin
 
 # Program name
-TARGET = format_reads_file
+TARGET = evaluation_correction
 
 # Objects names
-OBJECTS = $(BUILD)/format_reads_file.o
+OBJECTS = $(BUILD)/filehandler.o $(BUILD)/master.o $(BUILD)/outputstructure.o $(BUILD)/read.o $(BUILD)/evaluation_correction.o $(BUILD)/utils.o
 
 # Rules
 

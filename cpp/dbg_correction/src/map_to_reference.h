@@ -1,5 +1,5 @@
 #pragma once
-#include "./utils/src/utils.h"
+#include "utils.h"
 #include "settings.h"
 
 // Loads reference genome in memory as a vector of sequences. Identifiers are not stored because the reference file is processed before and sequence names are

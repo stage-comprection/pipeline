@@ -1,34 +1,23 @@
-# Compiler options
-CC = g++
-OPTCFLAGS= -Ofast -march=native
-CFLAGS= -Wall -Werror -std=c++11 $(OPTCFLAGS)
-LDFLAGS= -pthread
+# This is a bit a fraud, just launching makefiles
 
-# Directory organisation
-BASEDIR = .
-SRC = $(BASEDIR)/src
-BUILD = $(BASEDIR)/build
-BIN = $(BASEDIR)/bin
+DIRS = dbg_correction evaluation_correction format_reads_file filter_sam_output
+BUILDDIRS = $(DIRS:%=build-%)
+CLEANDIRS = $(DIRS:%=clean-%)
 
-# Program name
-TARGET = 
-
-# Rules
-
-all: init $(TARGET)
-
-$(TARGET): $(BUILD)/$(TARGET).o
-	$(CC) $(CFLAGS) -o $(BIN)/$(TARGET) $^
-
-$(BUILD)/%.o: $(SRC)/%.cpp
-	$(CC) $(CFLAGS) -c -o $@ $^
+all: $(BUILDDIRS)
+$(DIRS): $(BUILDDIRS)
+$(BUILDDIRS):
+	$(MAKE) -C ./cpp/$(@:build-%=%)
+	chmod +x run_pipeline.py
 
 
-clean:
-	rm -rf $(BUILD)/*.o
-	rm -rf $(BIN)/$(TARGET)
+clean: $(CLEANDIRS)
+$(CLEANDIRS):
+	$(MAKE) -C ./cpp/$(@:clean-%=%) clean
+	rm -rf binaries/$(@:clean-%=%)
 
-init: 
-	mkdir -p $(BUILD) $(BIN)
 
-rebuild: clean $(TARGET)
+.PHONY: $(SUBDIRS)
+.PHONY: $(CLEANDIRS)
+.PHONY: clean
+.PHONY: all

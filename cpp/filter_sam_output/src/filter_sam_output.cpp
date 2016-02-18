@@ -1,4 +1,4 @@
-#include "./utils/src/utils.h"
+#include "utils.h"
 
 #include <iostream>
 
@@ -17,7 +17,7 @@ int main (int argc, char *argv[]) {
     output.open(outputFilePath);
 
     char line[5000];
-    string splittedLine;
+    vector<string> splittedLine;
     int size;
 
     while(cin.getline(line, 5000)){

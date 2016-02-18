@@ -1,6 +1,6 @@
 #pragma once
 
-#include "./utils/src/utils.h"
+#include "utils.h"
 #include "read.h"
 
 #include <dirent.h>
