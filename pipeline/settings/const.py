@@ -4,13 +4,15 @@ Defines constant names for settings variables
 
 
 # Subsetting names
+BASEDIR = 'baseDir'
 GENERAL = 'general'
 DATA = 'data'
 BOWTIE = 'bowtie'
 BLOOCOO = 'bloocoo'
 MUSKET = 'musket'
 DBG_CORRECTION = 'dbg_correction'
-EVALUATION = 'evaluationMode'
+EVALUATION = 'evaluation'
+EVALUATION_MODE = 'evaluationMode'
 FORMAT_READS = 'format_reads'
 
 # Shared properties

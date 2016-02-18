@@ -1,4 +1,3 @@
-# This is a bit a fraud, just launching makefiles
 
 DIRS = dbg_correction evaluation_correction format_reads_file filter_sam_output
 BUILDDIRS = $(DIRS:%=build-%)

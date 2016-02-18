@@ -6,10 +6,12 @@ Settings are stored in a dictionary which will later be merged with another
 dictionary containing command-line updated settings.
 """
 
+import os
 
 # General pipeline parameters
-general = {'outputPath': '/home/rferon/project/output/',
-           'correction': 'bcalm',
+general = {'baseDir': os.getcwd(),
+           'outputPath': '/home/rferon/project/output/',
+           'correction': 'dbg_correction',
            'correctedFile': 'corrected_',
            'nThreads': 6,
            'evaluationMode': False,
@@ -25,41 +27,41 @@ data = {'readsPath': '/home/rferon/project/data/reads/',
 
 
 # Bowtie parameters
-bowtie = {'path': './ext/bowtie/',
+bowtie = {'path': general['baseDir'] + '/ext/bowtie/',
           'output_file': 'bowtie_',
           'nMismatches': 3}
 
 
 # Bloocoo parameters
-bloocoo = {'path': './ext/bloocoo/',
+bloocoo = {'path': general['baseDir'] + '/ext/bloocoo/',
            'kmerSize': 31,
            'abundanceThreshold': 5}
 
 
 # Musket parameters
-musket = {'path': './ext/musket/',
+musket = {'path': general['baseDir'] + '/ext/musket/',
           'kmerSize': 31}
 
 
-# Bcalm correction parameters
-dbg_correction = {'path': './binaries/',
+# DBG correction parameters
+dbg_correction = {'path': general['baseDir'] + '/binaries/',
                   'kmerSizeBcalm': 31,
                   'kmerSizeBgreat': 31,
                   'abundanceThresholdBcalm': 5,
                   'abundanceThresholdBgreat': 5,
                   'settingsFile': 'correction_settings.ini',
-                  'pathToBcalm': '../ext/bcalm/',
-                  'pathToBgreat': '../ext/bgreat/'}
+                  'pathToBcalm': general['baseDir'] + '/ext/bcalm/',
+                  'pathToBgreat': general['baseDir'] + '/ext/bgreat/'}
 
 
 # Evaluation parameters
-evaluation = {'path': './binaries/',
+evaluation = {'path': general['baseDir'] + '/binaries/',
               'settingsFile': 'evaluation_settings.ini',
               'nTempFiles': 20}
 
 
 # Format reads utility
-format_reads = {'path': './binaries/'}
+format_reads = {'path': general['baseDir'] + '/binaries/'}
 
 
 # Generates default settings dictionary

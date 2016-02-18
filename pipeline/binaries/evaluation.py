@@ -4,6 +4,7 @@ Parameters are given using a .ini file instead of command-line arguments.
 """
 
 from ..settings import *
+import os
 
 
 # Generates an .ini file used by the evaluation pipeline to initialize
@@ -38,4 +39,5 @@ def evaluation(settings):
     generate_settings_file(settings)
 
     # Runs evaluation_correction binary
-    os.system(settings[EVALUATION][PATH] + 'evaluation_correction ')
+    os.system(settings[EVALUATION][PATH] + 'evaluation_correction ' +
+              settings[GENERAL][OUTPUT_PATH])

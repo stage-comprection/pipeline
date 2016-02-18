@@ -18,8 +18,8 @@ def generate_settings_file(settings):
 
         o.write("outputPath=" +
                 settings[GENERAL][OUTPUT_PATH] + "\n")
-        o.write("readsPath=" +
-                settings[DATA][READS_PATH] + "\n")
+        o.write("baseFileName=" +
+                settings[DATA][READS_FILE].replace('.fasta', '') + "\n")
         o.write("bcalmPath=" +
                 settings[DBG_CORRECTION][BCALM_PATH] + "\n")
         o.write("bowtiePath=" +
@@ -49,4 +49,6 @@ def dbg_correction(settings):
     generate_settings_file(settings)
 
     # Runs dbg_correction binary
-    os.system(settings[DBG_CORRECTION][PATH] + 'dbg_correction ')
+    os.system(settings[DBG_CORRECTION][PATH] +
+              'dbg_correction ' +
+              settings[GENERAL][OUTPUT_PATH])

@@ -24,6 +24,7 @@ def cleanup_files(settings):
     if int(settings[GENERAL][CLEANUP_MODE]) > 2:
         restore_reference_file(settings)
         restore_reads_file(settings)
+        shutil.rmtree(settings[GENERAL][OUTPUT_PATH], ignore_errors=True)
 
     elif int(settings[GENERAL][CLEANUP_MODE]) > 1:
         shutil.rmtree(settings[GENERAL][OUTPUT_PATH], ignore_errors=True)

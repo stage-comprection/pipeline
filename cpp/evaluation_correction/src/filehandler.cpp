@@ -55,6 +55,7 @@ void FileHandler::updateSettings(string& readsSetName, string& referenceName){
     // Global parameters
     this->getReadLength();
     this->getLinesInCorrectedReads();
+
 }
 
 
@@ -335,7 +336,7 @@ vector<Read> FileHandler::getReadsFromTempFiles(const uint batchNumber){
 
         if (line[0] == '>'){
             tempRead.identifier = line.substr(1, line.length());
-        } else {
+        } else if (line.size() > 2){
             tempRead.originalSequence = line;
             reads.push_back(tempRead);
         }

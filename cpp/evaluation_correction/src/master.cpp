@@ -27,6 +27,7 @@ Master::Master(string& settingsFilePath){
 // Calculates the gain obtained after correction, using the number of True Positives, False Positives and False Negatives
 void Master::computeMetrics(){
 
+
     // Loads reference genome in memory
     this->fileHandler.getReferenceGenome();
 
@@ -135,8 +136,6 @@ vector<string> Master::readSettingsFile(string& settingsFilePath){
     } else {
         cout<<"\n     Error: cannot find read set name in settings file, exiting... \n";
     }
-
-
 
     return output;
 }
