@@ -7,6 +7,7 @@ all: $(BUILDDIRS)
 $(DIRS): $(BUILDDIRS)
 $(BUILDDIRS):
 	$(MAKE) -C ./cpp/$(@:build-%=%)
+	git submodule update
 	chmod +x run_pipeline.py
 
 
