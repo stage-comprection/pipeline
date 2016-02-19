@@ -71,9 +71,10 @@ def format_reads_file(settings):
                   settings[DATA][READS_FILE] +
                   '.backup')
 
-        os.system(settings[FORMAT_READS][PATH] +
-                  'format_reads_file ' +
-                  settings[DATA][READS_FILE])
+    os.system(settings[FORMAT_READS][PATH] +
+              'format_reads_file ' +
+              settings[DATA][READS_PATH] +
+              settings[DATA][READS_FILE])
 
 
 # Formats the reference file with '0' as ID and sequence on one line

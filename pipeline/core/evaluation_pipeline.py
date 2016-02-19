@@ -29,22 +29,26 @@ def evaluation_pipeline(settings):
         fm.cleanup_files(settings)
 
         # Creates output directory if not already created
-        print('\n\n - Creating output directory')
-        fm.create_output_directory(settings)
+        if int(settings[GENERAL][CLEANUP_MODE]) > 1:
+            print('\n\n - Creating output directory')
+            fm.create_output_directory(settings)
 
         # Formats reference file for easier use
-        print('\n\n - Formatting reference file (',
-              settings[DATA][REF_FILE], ')')
-        fm.format_reference_file(settings)
+        if int(settings[GENERAL][CLEANUP_MODE]) > 2:
+            print('\n\n - Formatting reference file (',
+                  settings[DATA][REF_FILE], ')')
+            fm.format_reference_file(settings)
 
         # Formats reads file for easier use
-        print('\n\n - Formatting reads file (',
-              settings[DATA][READS_FILE], ')')
-        fm.format_reads_file(settings)
+        if int(settings[GENERAL][CLEANUP_MODE]) > 2:
+            print('\n\n - Formatting reads file (',
+                  settings[DATA][READS_FILE], ')')
+            fm.format_reads_file(settings)
 
         # Corrects reads file after checking if a corrected file already exists
         if not os.path.isfile(settings[GENERAL][OUTPUT_PATH] +
-                              settings[GENERAL][CORRECTED_FILE]):
+                              settings[GENERAL][CORRECTED_FILE] +
+                              settings[DATA][READS_FILE]):
             print('\n\n - Correcting reads file with ',
                   settings[GENERAL][CORRECTION])
             if settings[GENERAL][CORRECTION] == 'musket':

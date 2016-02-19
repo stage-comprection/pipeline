@@ -6,8 +6,8 @@ CLEANDIRS = $(DIRS:%=clean-%)
 all: $(BUILDDIRS)
 $(DIRS): $(BUILDDIRS)
 $(BUILDDIRS):
+	git submodule foreach git pull origin master
 	$(MAKE) -C ./cpp/$(@:build-%=%)
-	git submodule update
 	chmod +x run_pipeline.py
 
 

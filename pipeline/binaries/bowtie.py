@@ -43,8 +43,7 @@ def bowtie(settings):
               settings[BOWTIE][OUTPUT_FILE] +
               settings[DATA][READS_FILE].replace('.fasta', '') +
               ' ' +
-              settings[GENERAL][OUTPUT_PATH] +
-              settings[GENERAL][CORRECTED_FILE] +
+              settings[DATA][READS_PATH] +
               settings[DATA][READS_FILE] +
               ' -S ' +
               settings[GENERAL][OUTPUT_PATH] +
