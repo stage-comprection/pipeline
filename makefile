@@ -17,7 +17,16 @@ $(CLEANDIRS):
 	rm -rf binaries/$(@:clean-%=%)
 
 
+install: init $(BUILDDIRS)
+
+init:
+	git submodule foreach git pull origin master
+
+
+
 .PHONY: $(SUBDIRS)
 .PHONY: $(CLEANDIRS)
 .PHONY: clean
 .PHONY: all
+.PHONY: install 
+.PHONY: init

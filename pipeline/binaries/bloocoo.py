@@ -19,7 +19,7 @@ def bloocoo(settings):
               settings[BLOOCOO][PATH] +
               'Bloocoo -high-recall -file ' +
               settings[DATA][READS_PATH] +
-              settings[DATA][REF_FILE] +
+              settings[DATA][READS_FILE] +
               ' -kmer-size ' +
               str(settings[BLOOCOO][KMER_SIZE]) +
               ' -abundance ' +
