@@ -3,11 +3,8 @@ DIRS = dbg_correction evaluation_correction format_reads_file filter_sam_output
 BUILDDIRS = $(DIRS:%=build-%)
 CLEANDIRS = $(DIRS:%=clean-%)
 
-all: $(BUILDDIRS)
-$(DIRS): $(BUILDDIRS)
+all: update $(BUILDDIRS)
 $(BUILDDIRS):
-	mkdir binaries
-	git submodule foreach git pull origin master
 	$(MAKE) -C ./cpp/$(@:build-%=%)
 	chmod +x run_pipeline.py
 
@@ -18,7 +15,20 @@ $(CLEANDIRS):
 	rm -rf binaries/$(@:clean-%=%)
 
 
+init: install $(BUILDDIRS)
+
+
+install: 
+	mkdir binaries
+
+
+update:
+	git submodule foreach git pull origin master
+	
+
+
 .PHONY: $(SUBDIRS)
 .PHONY: $(CLEANDIRS)
 .PHONY: clean
 .PHONY: all
+.PHONY: init
