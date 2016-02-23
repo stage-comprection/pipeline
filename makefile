@@ -20,6 +20,7 @@ init: install $(BUILDDIRS)
 
 install: 
 	mkdir binaries
+	mkdir ext
 
 
 update:

@@ -53,6 +53,9 @@ settings:
     - format_reads (FORMAT_READS):
         - path (PATH) = path to format reads binary
 
+    - bowtie_parser (BOWTIE_PARSER):
+        - path (PATH) = path to bowtie parser binary
+
 """
 
 from . import command_line

@@ -64,6 +64,10 @@ evaluation = {'path': general['baseDir'] + '/binaries/',
 format_reads = {'path': general['baseDir'] + '/binaries/'}
 
 
+# Bowtie Parser utility
+bowtie_parser = {'path': general['baseDir'] + '/binaries/'}
+
+
 # Generates default settings dictionary
 settings = {'general': general,
             'data': data,
@@ -72,5 +76,6 @@ settings = {'general': general,
             'musket': musket,
             'dbg_correction': dbg_correction,
             'evaluation': evaluation,
-            'format_reads': format_reads
+            'format_reads': format_reads,
+            'bowtie_parser': bowtie_parser
             }

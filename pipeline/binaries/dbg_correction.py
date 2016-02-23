@@ -26,6 +26,8 @@ def generate_settings_file(settings):
                 settings[BOWTIE][PATH] + "\n")
         o.write("bgreatPath=" +
                 settings[DBG_CORRECTION][BGREAT_PATH] + "\n")
+        o.write("bowtieParserPath=" +
+                settings[BOWTIE_PARSER][PATH] + "\n")
         o.write("readsFile=" +
                 settings[DATA][READS_FILE] + "\n")
         o.write("kmerSizeBgreat=" +

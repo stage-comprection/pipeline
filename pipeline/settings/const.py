@@ -14,6 +14,7 @@ DBG_CORRECTION = 'dbg_correction'
 EVALUATION = 'evaluation'
 EVALUATION_MODE = 'evaluationMode'
 FORMAT_READS = 'format_reads'
+BOWTIE_PARSER = 'bowtie_parser'
 
 # Shared properties
 PATH = 'path'

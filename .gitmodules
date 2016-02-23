@@ -13,3 +13,6 @@
 [submodule "cpp/utils"]
 	path = cpp/utils
 	url = https://github.com/stage-comprection/utils
+[submodule "cpp/bowtie_to_reads"]
+	path = cpp/bowtie_to_reads
+	url = https://github.com/stage-comprection/bowtie_to_reads
