@@ -4,9 +4,6 @@
 [submodule "cpp/format_reads_file"]
 	path = cpp/format_reads_file
 	url = https://github.com/stage-comprection/format_reads_file
-[submodule "cpp/filter_sam_output"]
-	path = cpp/filter_sam_output
-	url = https://github.com/stage-comprection/filter_sam_output
 [submodule "cpp/evaluation_correction"]
 	path = cpp/evaluation_correction
 	url = https://github.com/stage-comprection/evaluation_correction
