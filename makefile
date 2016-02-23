@@ -1,12 +1,12 @@
 
-DIRS = dbg_correction evaluation_correction format_reads_file filter_sam_output
+DIRS = dbg_correction evaluation_correction format_reads_file bowtie_to_reads
 BUILDDIRS = $(DIRS:%=build-%)
 CLEANDIRS = $(DIRS:%=clean-%)
+INITDIRS = $(DIRS:%=init-%)
 
 all: update $(BUILDDIRS)
 $(BUILDDIRS):
 	$(MAKE) -C ./cpp/$(@:build-%=%)
-	chmod +x run_pipeline.py
 
 
 clean: $(CLEANDIRS)
@@ -15,12 +15,17 @@ $(CLEANDIRS):
 	rm -rf binaries/$(@:clean-%=%)
 
 
-init: install $(BUILDDIRS)
+init: makedirs $(INITDIRS) permission
+$(INITDIRS):
+	$(MAKE) -C ./cpp/$(@:init-%=%) init
 
 
-install: 
+makedirs: 
 	mkdir binaries
-	mkdir ext
+
+
+permission:
+	chmod +x run_pipeline.py
 
 
 update:
