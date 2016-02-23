@@ -1,9 +1,6 @@
 [submodule "cpp/dbg_correction"]
 	path = cpp/dbg_correction
 	url = https://github.com/stage-comprection/dbg_correction
-[submodule "cpp/format_reads_file"]
-	path = cpp/format_reads_file
-	url = https://github.com/stage-comprection/format_reads_file
 [submodule "cpp/evaluation_correction"]
 	path = cpp/evaluation_correction
 	url = https://github.com/stage-comprection/evaluation_correction
@@ -13,3 +10,7 @@
 [submodule "cpp/bowtie_to_reads"]
 	path = cpp/bowtie_to_reads
 	url = https://github.com/stage-comprection/bowtie_to_reads
+[submodule "cpp/format_reads_file"]
+	path = cpp/format_reads_file
+	url = https://github.com/stage-comprection/format_reads_file
+
