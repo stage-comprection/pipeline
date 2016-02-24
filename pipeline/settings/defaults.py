@@ -29,6 +29,7 @@ data = {'readsPath': '/home/rferon/project/data/reads/',
 # Bowtie parameters
 bowtie = {'path': general['baseDir'] + '/ext/bowtie/',
           'output_file': 'bowtie_',
+          'index_file': 'bowtie_index_',
           'nMismatches': 3}
 
 

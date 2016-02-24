@@ -23,7 +23,7 @@ def bowtie_index(settings):
               settings[DATA][REF_FILE] +
               ' ' +
               settings[GENERAL][OUTPUT_PATH] +
-              settings[BOWTIE][OUTPUT_FILE] +
+              settings[BOWTIE][INDEX_FILE] +
               settings[DATA][READS_FILE].replace('.fasta', '')
               )
 
@@ -43,19 +43,20 @@ def bowtie(settings):
                   str(settings[GENERAL][N_THREADS]) +
                   ' ' +
                   settings[GENERAL][OUTPUT_PATH] +
-                  settings[BOWTIE][OUTPUT_FILE] +
+                  settings[BOWTIE][INDEX_FILE] +
                   settings[DATA][READS_FILE].replace('.fasta', '') +
                   ' ' +
                   settings[DATA][READS_PATH] +
                   settings[DATA][READS_FILE] +
                   ' | ' +
                   settings[BOWTIE_PARSER][PATH] +
-                  "bowtie_to_reads" +
+                  "bowtie_to_reads " +
                   settings[DATA][REF_PATH] +
                   settings[DATA][REF_FILE] +
                   " true " +
+                  settings[GENERAL][OUTPUT_PATH] +
                   settings[BOWTIE][OUTPUT_FILE] +
-                  settings[DATA][READS_FILE].replace('fasta', '')
+                  settings[DATA][READS_FILE].replace('.fasta', '')
                   )
     else:
         print('\n    Found a SAM output file, skipping alignment' +

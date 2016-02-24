@@ -39,6 +39,7 @@ REF_FILE = 'refFile'
 
 # Bowtie
 N_MISMATCHES = 'nMismatches'
+INDEX_FILE = 'index_file'
 
 # Bloocoo
 ABUNDANCE = 'abundanceThreshold'
