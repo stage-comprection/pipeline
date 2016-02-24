@@ -48,10 +48,14 @@ def bowtie(settings):
                   ' ' +
                   settings[DATA][READS_PATH] +
                   settings[DATA][READS_FILE] +
-                  ' -S ' +
-                  settings[GENERAL][OUTPUT_PATH] +
+                  ' | ' +
+                  settings[BOWTIE_PARSER][PATH] +
+                  "bowtie_to_reads" +
+                  settings[DATA][REF_PATH] +
+                  settings[DATA][REF_FILE] +
+                  " true " +
                   settings[BOWTIE][OUTPUT_FILE] +
-                  settings[DATA][READS_FILE].replace('.fasta', '')
+                  settings[DATA][READS_FILE].replace('fasta', '')
                   )
     else:
         print('\n    Found a SAM output file, skipping alignment' +
