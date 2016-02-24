@@ -29,9 +29,8 @@ def evaluation_pipeline(settings):
         fm.cleanup_files(settings)
 
         # Creates output directory if not already created
-        if int(settings[GENERAL][CLEANUP_MODE]) > 1:
-            print('\n\n - Creating output directory')
-            fm.create_output_directory(settings)
+        print('\n\n - Creating output directory')
+        fm.create_output_directory(settings)
 
         # Formats reference file for easier use
         if int(settings[GENERAL][CLEANUP_MODE]) > 2:
