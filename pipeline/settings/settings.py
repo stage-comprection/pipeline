@@ -11,6 +11,7 @@ settings:
         - correction (CORRECTION) = correction tool
         - correctedFile (CORRECTED_FILE) = corrected file name
         - settingsFile (SETTINGS_FILE) = settings file name
+        - savePath (SAVE_PATH) = path to save directory
         - nThreads (N_THREADS) = number of available threads
         - evaluationMode (EVALUATION) = bool (True: only evaluation)
         - cleanup (CLEANUP_MODE) = 1: All but bowtie 2: All 3: Restore data bk

@@ -158,11 +158,9 @@ def print_settings_file(settings):
 # Saves a copy of important files at the end of the run
 def save_pipeline_output(settings):
 
-    saveDir = (settings[GENERAL][OUTPUT_PATH])
-    baseFileName = settings[DATA][READS_FILE].replace('.fasta', '') + '/'
-    saveDir = saveDir.replace(baseFileName, '')
-    saveDir += ('save/' +
-                settings[DATA][READS_FILE].replace('.fasta', '') +
+    saveDir = (settings[GENERAL][SAVE_PATH])
+    baseFileName = settings[DATA][READS_FILE].replace('.fasta', '')
+    saveDir += (baseFileName +
                 '_' + settings[GENERAL][CORRECTION])
 
     if settings[GENERAL][CORRECTION] == 'dbg_correction':
@@ -171,58 +169,85 @@ def save_pipeline_output(settings):
         saveDir += '_' + str(settings[DBG_CORRECTION][ABUNDANCE_BCALM])
         saveDir += '_' + str(settings[DBG_CORRECTION][KMER_SIZE_BGREAT])
         saveDir += '_' + str(settings[DBG_CORRECTION][ABUNDANCE_BGREAT])
-        saveDir += '/'
 
     elif settings[GENERAL][CORRECTION] == 'bloocoo':
         saveDir += '_' + str(settings[BLOOCOO][KMER_SIZE])
         saveDir += '_' + str(settings[BLOOCOO][ABUNDANCE])
-        saveDir += '/'
 
     elif settings[GENERAL][CORRECTION] == 'musket':
         saveDir += '_' + str(settings[MUSKET][KMER_SIZE])
-        saveDir += '/'
+
+    count = 1
+    while os.path.isdir(saveDir + '_' + str(count)):
+        count += 1
+
+    saveDir += '_' + str(count)
+    saveDir += '/'
 
     os.makedirs(saveDir)
 
-    shutil.copy(settings[GENERAL][OUTPUT_PATH] +
-                settings[GENERAL][CORRECTED_FILE] +
-                settings[DATA][READS_FILE],
-                saveDir +
-                settings[GENERAL][CORRECTED_FILE] +
-                settings[DATA][READS_FILE])
+    try:
+        shutil.copy(settings[GENERAL][OUTPUT_PATH] +
+                    settings[GENERAL][CORRECTED_FILE] +
+                    settings[DATA][READS_FILE],
+                    saveDir +
+                    settings[GENERAL][CORRECTED_FILE] +
+                    settings[DATA][READS_FILE])
+    except FileNotFoundError:
+        pass
 
-    shutil.copy(settings[GENERAL][OUTPUT_PATH] +
-                settings[GENERAL][SETTINGS_FILE],
-                saveDir +
-                settings[GENERAL][SETTINGS_FILE])
+    try:
+        shutil.copy(settings[GENERAL][OUTPUT_PATH] +
+                    settings[GENERAL][SETTINGS_FILE],
+                    saveDir +
+                    settings[GENERAL][SETTINGS_FILE])
+    except FileNotFoundError:
+        pass
 
-    shutil.copy(settings[GENERAL][OUTPUT_PATH] +
-                'logs_bowtie.txt',
-                saveDir +
-                'logs_bowtie.txt')
+    try:
+        shutil.copy(settings[GENERAL][OUTPUT_PATH] +
+                    'logs_bowtie.txt',
+                    saveDir +
+                    'logs_bowtie.txt')
+    except FileNotFoundError:
+        pass
 
-    shutil.copy(settings[GENERAL][OUTPUT_PATH] +
-                'logs_bcalm.txt',
-                saveDir +
-                'logs_bcalm.txt')
+    try:
+        shutil.copy(settings[GENERAL][OUTPUT_PATH] +
+                    'logs_bcalm.txt',
+                    saveDir +
+                    'logs_bcalm.txt')
+    except FileNotFoundError:
+        pass
+    try:
+        shutil.copy(settings[GENERAL][OUTPUT_PATH] +
+                    'logs_bglue.txt',
+                    saveDir +
+                    'logs_bglue.txt')
+    except FileNotFoundError:
+        pass
 
-    shutil.copy(settings[GENERAL][OUTPUT_PATH] +
-                'logs_bglue.txt',
-                saveDir +
-                'logs_bglue.txt')
+    try:
+        shutil.copy(settings[GENERAL][OUTPUT_PATH] +
+                    'logs_bgreat.txt',
+                    saveDir +
+                    'logs_bgreat.txt')
+    except FileNotFoundError:
+        pass
 
-    shutil.copy(settings[GENERAL][OUTPUT_PATH] +
-                'logs_bgreat.txt',
-                saveDir +
-                'logs_bgreat.txt')
+    try:
+        shutil.copy(settings[GENERAL][OUTPUT_PATH] +
+                    'logs_bowtie_index.txt',
+                    saveDir +
+                    'logs_bowtie_index.txt')
+    except FileNotFoundError:
+        pass
 
-    shutil.copy(settings[GENERAL][OUTPUT_PATH] +
-                'logs_bowtie_index.txt',
-                saveDir +
-                'logs_bowtie_index.txt')
-
-    shutil.copy(settings[GENERAL][OUTPUT_PATH] +
-                'gain_' +
-                settings[DATA][READS_FILE].replace('.fasta', ''),
-                saveDir +
-                'evaluation_results.txt')
+    try:
+        shutil.copy(settings[GENERAL][OUTPUT_PATH] +
+                    'gain_' +
+                    settings[DATA][READS_FILE].replace('.fasta', ''),
+                    saveDir +
+                    'evaluation_results.txt')
+    except FileNotFoundError:
+        pass
