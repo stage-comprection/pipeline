@@ -72,3 +72,9 @@ def evaluation_pipeline(settings):
     # Evaluates correction results with the evaluation pipeline
     print(' - Evaluating correction\n\n')
     binaries.evaluation(settings)
+
+    # Writes a copy of all settings in a file
+    fm.print_settings_file(settings)
+
+    # Saves important files into another directory
+    fm.save_pipeline_output(settings)

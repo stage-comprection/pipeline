@@ -138,3 +138,66 @@ def restore_reference_file(settings):
                   '.backup',
                   settings[DATA][REF_PATH] +
                   settings[DATA][REF_FILE])
+
+
+# Prints a copy of all settings in a file
+def print_settings_file(settings):
+
+    with open(settings[GENERAL][OUTPUT_PATH] +
+              settings[GENERAL][SETTINGS_FILE], 'w') as o:
+        for key1, value1 in settings.items():
+            o.write('[' + key1 + ']\n')
+            for key2, value2 in value1.items():
+                try:
+                    o.write(key2 + ': ' + value2 + '\n')
+                except TypeError:
+                    o.write(key2 + ': ' + str(value2) + '\n')
+            o.write('\n')
+
+
+# Saves a copy of important files at the end of the run
+def save_pipeline_output(settings):
+
+    saveDir = (settings[GENERAL][OUTPUT_PATH])
+    baseFileName = settings[DATA][READS_FILE].replace('.fasta', '') + '/'
+    saveDir = saveDir.replace(baseFileName, '')
+    saveDir += ('save/' +
+                settings[DATA][READS_FILE].replace('.fasta', '') +
+                '_' + settings[GENERAL][CORRECTION])
+
+    if settings[GENERAL][CORRECTION] == 'dbg_correction':
+
+        saveDir += '_' + str(settings[DBG_CORRECTION][KMER_SIZE_BCALM])
+        saveDir += '_' + str(settings[DBG_CORRECTION][ABUNDANCE_BCALM])
+        saveDir += '_' + str(settings[DBG_CORRECTION][KMER_SIZE_BGREAT])
+        saveDir += '_' + str(settings[DBG_CORRECTION][ABUNDANCE_BGREAT])
+        saveDir += '/'
+
+    elif settings[GENERAL][CORRECTION] == 'bloocoo':
+        saveDir += '_' + str(settings[BLOOCOO][KMER_SIZE])
+        saveDir += '_' + str(settings[BLOOCOO][ABUNDANCE])
+        saveDir += '/'
+
+    elif settings[GENERAL][CORRECTION] == 'musket':
+        saveDir += '_' + str(settings[MUSKET][KMER_SIZE])
+        saveDir += '/'
+
+    os.makedirs(saveDir)
+
+    shutil.copy(settings[GENERAL][OUTPUT_PATH] +
+                settings[GENERAL][CORRECTED_FILE] +
+                settings[DATA][READS_FILE],
+                saveDir +
+                settings[GENERAL][CORRECTED_FILE] +
+                settings[DATA][READS_FILE])
+
+    shutil.copy(settings[GENERAL][OUTPUT_PATH] +
+                settings[GENERAL][SETTINGS_FILE],
+                saveDir +
+                settings[GENERAL][SETTINGS_FILE])
+
+    shutil.copy(settings[GENERAL][OUTPUT_PATH] +
+                'gain_' +
+                settings[DATA][READS_FILE].replace('.fasta', ''),
+                saveDir +
+                'evaluation_results.txt')
