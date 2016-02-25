@@ -197,6 +197,31 @@ def save_pipeline_output(settings):
                 settings[GENERAL][SETTINGS_FILE])
 
     shutil.copy(settings[GENERAL][OUTPUT_PATH] +
+                'logs_bowtie.txt',
+                saveDir +
+                'logs_bowtie.txt')
+
+    shutil.copy(settings[GENERAL][OUTPUT_PATH] +
+                'logs_bcalm.txt',
+                saveDir +
+                'logs_bcalm.txt')
+
+    shutil.copy(settings[GENERAL][OUTPUT_PATH] +
+                'logs_bglue.txt',
+                saveDir +
+                'logs_bglue.txt')
+
+    shutil.copy(settings[GENERAL][OUTPUT_PATH] +
+                'logs_bgreat.txt',
+                saveDir +
+                'logs_bgreat.txt')
+
+    shutil.copy(settings[GENERAL][OUTPUT_PATH] +
+                'logs_bowtie_index.txt',
+                saveDir +
+                'logs_bowtie_index.txt')
+
+    shutil.copy(settings[GENERAL][OUTPUT_PATH] +
                 'gain_' +
                 settings[DATA][READS_FILE].replace('.fasta', ''),
                 saveDir +
