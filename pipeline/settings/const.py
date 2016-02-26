@@ -48,8 +48,8 @@ ABUNDANCE = 'abundanceThreshold'
 # DBG correction
 KMER_SIZE_BCALM = 'kmerSizeBcalm'
 KMER_SIZE_BGREAT = 'kmerSizeBgreat'
-ABUNDANCE_BCALM = 'abundanceThresholdBcalm'
-ABUNDANCE_BGREAT = 'abundanceThresholdBgreat'
+ABUNDANCE_BCALM = 'abundanceBcalm'
+ABUNDANCE_BGREAT = 'abundanceBgreat'
 BCALM_PATH = 'pathToBcalm'
 BGREAT_PATH = 'pathToBgreat'
 
