@@ -124,8 +124,8 @@ def update_output_path():
         outputDir += '_' + str(settings[MUSKET][KMER_SIZE])
 
     count = 0
-    while os.path.isdir(outputDir + '_' + str(count)):
-        count += 1
+    # while os.path.isdir(outputDir + '_' + str(count)):
+    #     count += 1
 
     outputDir += '_' + str(count)
     outputDir += '/'

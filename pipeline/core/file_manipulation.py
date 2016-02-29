@@ -124,6 +124,49 @@ def restore_reference_file(settings):
                   settings[DATA][REF_FILE])
 
 
+# Generates a stats file
+def generate_stats_file(settings):
+
+    bgreat = open(settings[GENERAL][OUTPUT_PATH] +
+                  'logs_bgreat.txt')
+    bowtie = open(settings[GENERAL][OUTPUT_PATH] +
+                  'logs_bowtie.txt')
+    output = open(settings[GENERAL][OUTPUT_PATH] +
+                  'correction_stats.txt', 'w')
+
+    for line in bgreat:
+        if line.startswith('Number of unitig'):
+            nUnitigs = line.split(': ')[1].strip('\n')
+        elif line.startswith('Read'):
+            nReads = line.split(' : ')[1].strip('\n')
+        elif line.startswith('No Overlap'):
+            nNotOverlap = line.split(' : ')[1].split(' ')[0].strip('\n')
+        elif line.startswith('Got Overlap'):
+            nOverlap = line.split(' : ')[1].split(' ')[0].strip('\n')
+        elif line.startswith('Overlap and Aligned'):
+            nOverlapAligned = line.split(' : ')[1].split(' ')[0].strip('\n')
+        elif line.startswith('Overlap but no aligne'):
+            nOverlapNotAligned = line.split(' : ')[1].split(' ')[0].strip('\n')
+
+    for line in bowtie:
+        if line.startswith('# reads with at least one reported'):
+            nAligned = line.split(': ')[1].split(' ')[0].strip('\n')
+        elif line.startswith('# reads that failed to align'):
+            nUnaligned = line.split(': ')[1].split(' ')[0].strip('\n')
+
+    output.write('nUnitigs' + '\t' + 'nReads' + '\t' + 'nNotOverlap' + '\t' +
+                 'nOverlap' + '\t' + 'nOverlapAligned' + '\t' +
+                 'nOverlapNotAligned' + '\t' + 'nAligned' + '\t' +
+                 'nUnaligned' + '\n')
+    output.write(nUnitigs + '\t' + nReads + '\t' + nNotOverlap + '\t' +
+                 nOverlap + '\t' + nOverlapAligned + '\t' +
+                 nOverlapNotAligned + '\t' + nAligned + '\t' + nUnaligned)
+
+    output.close()
+    bgreat.close()
+    bowtie.close()
+
+
 # Prints a copy of all settings in a file
 def print_settings_file(settings):
 
