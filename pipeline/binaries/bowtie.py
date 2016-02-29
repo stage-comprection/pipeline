@@ -48,7 +48,7 @@ def bowtie(settings):
                   ' ' +
                   settings[DATA][READS_PATH] +
                   settings[DATA][READS_FILE] +
-                  ' | ' +
+                  ' --sam-nohead --sam-nosq -S | ' +
                   settings[BOWTIE_PARSER][PATH] +
                   "bowtie_to_reads " +
                   settings[DATA][REF_PATH] +

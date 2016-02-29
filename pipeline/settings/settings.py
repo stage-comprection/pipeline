@@ -79,6 +79,31 @@ for key in defaults.settings:
         settings[key] = ChainMap({},
                                  defaults.settings[key])
 
-# Updates output path with the original reads file's name
-settings[GENERAL][OUTPUT_PATH] += settings[DATA][READS_FILE].replace('.fasta',
-                                                                     '') + '/'
+# Updates output path with the new directory name
+# Format : READSFILE_CORRECTION_PARAMETERS_COUNT
+    outputDir = (settings[GENERAL][OUTPUT_PATH])
+    baseFileName = settings[DATA][READS_FILE].replace('.fasta', '')
+    outputDir += (baseFileName +
+                  '_' + settings[GENERAL][CORRECTION])
+
+    if settings[GENERAL][CORRECTION] == 'dbg_correction':
+
+        outputDir += '_' + str(settings[DBG_CORRECTION][KMER_SIZE_BCALM])
+        outputDir += '_' + str(settings[DBG_CORRECTION][ABUNDANCE_BCALM])
+        outputDir += '_' + str(settings[DBG_CORRECTION][KMER_SIZE_BGREAT])
+        outputDir += '_' + str(settings[DBG_CORRECTION][ABUNDANCE_BGREAT])
+
+    elif settings[GENERAL][CORRECTION] == 'bloocoo':
+        outputDir += '_' + str(settings[BLOOCOO][KMER_SIZE])
+        outputDir += '_' + str(settings[BLOOCOO][ABUNDANCE])
+
+    elif settings[GENERAL][CORRECTION] == 'musket':
+        outputDir += '_' + str(settings[MUSKET][KMER_SIZE])
+
+    count = 1
+    while os.path.isdir(outputDir + '_' + str(count)):
+        count += 1
+
+    outputDir += '_' + str(count)
+    outputDir += '/'
+    settings[GENERAL][OUTPUT_PATH] = outputDir

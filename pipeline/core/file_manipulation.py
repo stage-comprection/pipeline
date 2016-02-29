@@ -36,12 +36,10 @@ def cleanup_files(settings):
                     os.remove(root + f)
 
 
-# Creates the output directory based on the reads file's name if it doesn't
-# already exist
+# Creates the output directory
 def create_output_directory(settings):
 
-    if not os.path.isdir(settings[GENERAL][OUTPUT_PATH]):
-        os.makedirs(settings[GENERAL][OUTPUT_PATH])
+    os.makedirs(settings[GENERAL][OUTPUT_PATH])
 
 
 # Creates a reads file which is a subset of the original reads file
@@ -249,5 +247,13 @@ def save_pipeline_output(settings):
                     settings[DATA][READS_FILE].replace('.fasta', ''),
                     saveDir +
                     'evaluation_results.txt')
+    except FileNotFoundError:
+        pass
+
+    try:
+        shutil.copy(settings[GENERAL][OUTPUT_PATH] +
+                    'correction_stats.txt',
+                    saveDir +
+                    'correction_stats.txt')
     except FileNotFoundError:
         pass
