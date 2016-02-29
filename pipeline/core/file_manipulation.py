@@ -14,26 +14,12 @@ import os
 import shutil
 
 
-# Cleanup pipeline's output (several modes):
-# 0: nothing
-# 1: remove all files except bowtie output
-# 2: remove output directory entirely
-# 3: remove output directory + restore reads and reference files from backups
+# Cleanup pipeline's files (reads and reference):
 def cleanup_files(settings):
 
-    if int(settings[GENERAL][CLEANUP_MODE]) > 2:
+    if settings[GENERAL][CLEANUP_MODE] == 'T':
         restore_reference_file(settings)
         restore_reads_file(settings)
-        shutil.rmtree(settings[GENERAL][OUTPUT_PATH], ignore_errors=True)
-
-    elif int(settings[GENERAL][CLEANUP_MODE]) > 1:
-        shutil.rmtree(settings[GENERAL][OUTPUT_PATH], ignore_errors=True)
-
-    elif int(settings[GENERAL][CLEANUP_MODE]) > 0:
-        for root, dirs, files in os.walk(settings[GENERAL][OUTPUT_PATH]):
-            for f in files:
-                if not f.startswith('bowtie'):
-                    os.remove(root + f)
 
 
 # Creates the output directory

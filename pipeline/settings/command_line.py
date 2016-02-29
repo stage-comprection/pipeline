@@ -51,11 +51,10 @@ parser.add_argument('--threads', '-t', dest='general.nThreads',
                     help='Number of threasd to use')
 
 parser.add_argument('--evaluationOnly', '-e', dest='general.evaluationMode',
-                    help='Activate evaluation mode (only performs evaluation)')
+                    help='Perform evaluation only (T / F)')
 
 parser.add_argument('--cleanup', '-u', dest='general.cleanup',
-                    help='Cleanup mode : 0 -> nothing, \n 1 -> soft,' +
-                    '\n2 -> all files deleted and backup files restored')
+                    help='Cleanup mode  (T / F)')
 
 parser.add_argument('--smallFile', '-s', dest='general.nReadsToAdd',
                     help='Number of reads to add to test file' +

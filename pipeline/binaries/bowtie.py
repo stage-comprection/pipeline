@@ -24,7 +24,8 @@ def bowtie_index(settings):
               ' ' +
               settings[GENERAL][OUTPUT_PATH] +
               settings[BOWTIE][INDEX_FILE] +
-              settings[DATA][READS_FILE].replace('.fasta', '')
+              settings[DATA][READS_FILE].replace('.fasta', '') +
+              ' 2>/dev/null'
               )
 
 

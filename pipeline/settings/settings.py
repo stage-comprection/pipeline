@@ -60,28 +60,51 @@ settings:
 
 """
 
-from . import command_line
 from .const import *
+from . import command_line
+from . import user_defined
 from . import defaults
 from collections import ChainMap
+import os
 
 
-# Merges command line settings with default settings (from settings.py)
-# Priority is given to command line values.
-# The merged values are stored in settings dictionary
-settings = dict()
-for key in defaults.settings:
-    if key in command_line.settings.keys():
-        settings[key] = ChainMap({},
-                                 command_line.settings[key],
-                                 defaults.settings[key])
-    else:
-        settings[key] = ChainMap({},
-                                 defaults.settings[key])
+def merge_settings_sources():
+    """
+    Merges command line settings with default settings (from settings.py)
+    Priority is given to command line values.
+    Merged values are stored in settings dictionary
+    """
+    settings = dict()
+    for key in defaults.settings:
+        if key in command_line.settings.keys():
+            if key in user_defined.settings.keys():
+                settings[key] = ChainMap({},
+                                         command_line.settings[key],
+                                         user_defined.settings[key],
+                                         defaults.settings[key])
+            else:
+                settings[key] = ChainMap({},
+                                         command_line.settings[key],
+                                         defaults.settings[key])
+        else:
+            if key in user_defined.settings.keys():
+                settings[key] = ChainMap({},
+                                         user_defined.settings[key],
+                                         defaults.settings[key])
+            else:
+                settings[key] = ChainMap({},
+                                         defaults.settings[key])
 
-# Updates output path with the new directory name
-# Format : READSFILE_CORRECTION_PARAMETERS_COUNT
-    outputDir = (settings[GENERAL][OUTPUT_PATH])
+    return settings
+
+
+def update_output_path():
+    """
+    Updates output path with the new directory name
+    Format : READSFILE_CORRECTION_PARAMETERS_COUNT
+    """
+
+    outputDir = settings[GENERAL][OUTPUT_PATH]
     baseFileName = settings[DATA][READS_FILE].replace('.fasta', '')
     outputDir += (baseFileName +
                   '_' + settings[GENERAL][CORRECTION])
@@ -100,10 +123,14 @@ for key in defaults.settings:
     elif settings[GENERAL][CORRECTION] == 'musket':
         outputDir += '_' + str(settings[MUSKET][KMER_SIZE])
 
-    count = 1
+    count = 0
     while os.path.isdir(outputDir + '_' + str(count)):
         count += 1
 
     outputDir += '_' + str(count)
     outputDir += '/'
     settings[GENERAL][OUTPUT_PATH] = outputDir
+
+
+settings = merge_settings_sources()
+update_output_path()
