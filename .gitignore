@@ -1,4 +1,4 @@
 binaries
 ext
 *.pyc
-
+settings.ini
