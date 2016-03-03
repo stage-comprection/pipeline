@@ -5,20 +5,20 @@ refFile = 'ecoli_k12.fasta'
 tempFiles = 20
 
 
-abundanceBcalm = 10
-kmerBcalm = [15, 21, 25, 31]
+abundance = 10
+kmerSize = [15, 21, 25, 31]
 
 
-def start_run(readsFile, refFile, tempFiles, abundanceBcalm, kmerBcalm):
+def start_run(readsFile, refFile, tempFiles, abundanceBcalm, kmerSize):
 
     os.system('./run_pipeline.py' +
               ' -i ' + readsFile +
               ' -f ' + refFile +
-              ' --abundanceBcalm ' + str(abundanceBcalm) +
+              ' --abundance ' + str(abundance) +
               ' --tempFiles ' + str(tempFiles) +
-              ' --kmerBcalm ' + str(kmerBcalm)
+              ' --kmerSize ' + str(kmerSize)
               )
 
 
-for k in kmerBcalm:
-    start_run(readsFile, refFile, tempFiles, abundanceBcalm, k)
+for k in kmerSize:
+    start_run(readsFile, refFile, tempFiles, abundance, k)
