@@ -63,17 +63,11 @@ parser.add_argument('--smallFile', '-s', dest='general.nReadsToAdd',
 parser.add_argument('--correction', '-c', dest='general.correction',
                     help='Correction tool to be used')
 
-parser.add_argument('--kmerBcalm', dest='dbg_correction.kmerSizeBcalm',
-                    help='Kmer size to use in bcalm')
+parser.add_argument('--kmerSize', dest='general.kmerSize',
+                    help='Kmer size to use in dbg_correction')
 
-parser.add_argument('--kmerBgreat', dest='dbg_correction.kmerSizeBgreat',
-                    help='Kmer size to use in bgreat')
-
-parser.add_argument('--abundanceBcalm', dest='dbg_correction.abundanceBcalm',
+parser.add_argument('--abundance', dest='general.abundanceBcalm',
                     help='Abundance threshold for bcalm')
-
-parser.add_argument('--abundanceBgreat', dest='dbg_correction.abundanceBgreat',
-                    help='Abundance threshold for bgreat')
 
 parser.add_argument('--tempFiles', dest='evaluation.nTempFiles',
                     help='Number of temp files to generate for evaluation')

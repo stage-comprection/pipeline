@@ -62,10 +62,8 @@ def settings_parser(filePath):
                   'kmerSize',
                   'abundanceThreshold',
                   'nMismatches',
-                  'abundanceBcalm'
-                  'abundanceBgreat',
-                  'kmerSizeBcalm',
-                  'kmerSizeBgreat']
+                  'abundance',
+                  'kmerSize']
 
     bool_values = ['cleanup',
                    'evaluationMode']

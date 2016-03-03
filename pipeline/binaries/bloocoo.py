@@ -21,9 +21,9 @@ def bloocoo(settings):
               settings[DATA][READS_PATH] +
               settings[DATA][READS_FILE] +
               ' -kmer-size ' +
-              str(settings[BLOOCOO][KMER_SIZE]) +
+              str(settings[GENERAL][KMER_SIZE]) +
               ' -abundance ' +
-              str(settings[BLOOCOO][ABUNDANCE]) +
+              str(settings[GENERAL][ABUNDANCE]) +
               ' nb-cores ' +
               str(settings[GENERAL][N_THREADS]) +
               ' -out ' +

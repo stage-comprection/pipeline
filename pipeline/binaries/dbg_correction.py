@@ -32,14 +32,10 @@ def generate_settings_file(settings):
                 settings[DATA][READS_PATH] + "\n")
         o.write("readsFile=" +
                 settings[DATA][READS_FILE] + "\n")
-        o.write("kmerSizeBgreat=" +
-                str(settings[DBG_CORRECTION][KMER_SIZE_BGREAT]) + "\n")
-        o.write("kmerSizeBcalm=" +
-                str(settings[DBG_CORRECTION][KMER_SIZE_BCALM]) + "\n")
-        o.write("abundanceBcalm=" +
-                str(settings[DBG_CORRECTION][ABUNDANCE_BCALM]) + "\n")
-        o.write("abundanceBgreat=" +
-                str(settings[DBG_CORRECTION][ABUNDANCE_BGREAT]) + "\n")
+        o.write("kmerSize=" +
+                str(settings[GENERAL][KMER_SIZE]) + "\n")
+        o.write("abundance=" +
+                str(settings[GENERAL][ABUNDANCE]) + "\n")
         o.write("nThreads=" +
                 str(settings[GENERAL][N_THREADS]) + "\n")
         o.write("nMismatchesBowtie=" +

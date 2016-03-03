@@ -18,7 +18,6 @@ BOWTIE_PARSER = 'bowtie_parser'
 
 # Shared properties
 PATH = 'path'
-KMER_SIZE = 'kmerSize'
 SETTINGS_FILE = 'settingsFile'
 OUTPUT_FILE = 'output_file'
 
@@ -31,6 +30,8 @@ N_THREADS = 'nThreads'
 ANALYSES_MODE = 'analysesMode'
 CLEANUP_MODE = 'cleanup'
 N_READS_TO_ADD = 'nReadsToAdd'
+KMER_SIZE = 'kmerSize'
+ABUNDANCE = 'abundance'
 
 # Data
 READS_PATH = 'readsPath'
@@ -42,14 +43,7 @@ REF_FILE = 'refFile'
 N_MISMATCHES = 'nMismatches'
 INDEX_FILE = 'index_file'
 
-# Bloocoo
-ABUNDANCE = 'abundanceThreshold'
-
 # DBG correction
-KMER_SIZE_BCALM = 'kmerSizeBcalm'
-KMER_SIZE_BGREAT = 'kmerSizeBgreat'
-ABUNDANCE_BCALM = 'abundanceBcalm'
-ABUNDANCE_BGREAT = 'abundanceBgreat'
 BCALM_PATH = 'pathToBcalm'
 BGREAT_PATH = 'pathToBgreat'
 

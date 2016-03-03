@@ -18,7 +18,9 @@ general = {'baseDir': os.getcwd(),
            'nThreads': 6,
            'evaluationMode': False,
            'cleanup': 0,
-           'nReadsToAdd': 0}
+           'nReadsToAdd': 0,
+           'kmerSize': 31,
+           'abundance': 5}
 
 
 # Data parameters
@@ -36,22 +38,15 @@ bowtie = {'path': general['baseDir'] + '/ext/bowtie/',
 
 
 # Bloocoo parameters
-bloocoo = {'path': general['baseDir'] + '/ext/bloocoo/',
-           'kmerSize': 31,
-           'abundanceThreshold': 5}
+bloocoo = {'path': general['baseDir'] + '/ext/bloocoo/'}
 
 
 # Musket parameters
-musket = {'path': general['baseDir'] + '/ext/musket/',
-          'kmerSize': 31}
+musket = {'path': general['baseDir'] + '/ext/musket/'}
 
 
 # DBG correction parameters
 dbg_correction = {'path': general['baseDir'] + '/binaries/',
-                  'kmerSizeBcalm': 31,
-                  'kmerSizeBgreat': 31,
-                  'abundanceBcalm': 5,
-                  'abundanceBgreat': 5,
                   'settingsFile': 'correction_settings.ini',
                   'pathToBcalm': general['baseDir'] + '/ext/bcalm/',
                   'pathToBgreat': general['baseDir'] + '/ext/bgreat/'}

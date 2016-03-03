@@ -109,19 +109,13 @@ def update_output_path():
     outputDir += (baseFileName +
                   '_' + settings[GENERAL][CORRECTION])
 
-    if settings[GENERAL][CORRECTION] == 'dbg_correction':
+    if settings[GENERAL][CORRECTION] in ['dbg_correction', 'bloocoo']:
 
-        outputDir += '_' + str(settings[DBG_CORRECTION][KMER_SIZE_BCALM])
-        outputDir += '_' + str(settings[DBG_CORRECTION][ABUNDANCE_BCALM])
-        outputDir += '_' + str(settings[DBG_CORRECTION][KMER_SIZE_BGREAT])
-        outputDir += '_' + str(settings[DBG_CORRECTION][ABUNDANCE_BGREAT])
-
-    elif settings[GENERAL][CORRECTION] == 'bloocoo':
-        outputDir += '_' + str(settings[BLOOCOO][KMER_SIZE])
-        outputDir += '_' + str(settings[BLOOCOO][ABUNDANCE])
+        outputDir += '_' + str(settings[GENERAL][KMER_SIZE])
+        outputDir += '_' + str(settings[GENERAL][ABUNDANCE])
 
     elif settings[GENERAL][CORRECTION] == 'musket':
-        outputDir += '_' + str(settings[MUSKET][KMER_SIZE])
+        outputDir += '_' + str(settings[GENERAL][KMER_SIZE])
 
     count = 0
     while os.path.isdir(outputDir + '_' + str(count)):

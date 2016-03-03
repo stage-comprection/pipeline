@@ -18,7 +18,7 @@ def musket(settings):
     os.system(
               settings[MUSKET][PATH] +
               'musket -k ' +
-              str(settings[MUSKET][KMER_SIZE]) +
+              str(settings[GENERAL][KMER_SIZE]) +
               ' 300000000 -p ' +
               str(settings[GENERAL][N_THREADS]) +
               ' -inorder ' +

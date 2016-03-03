@@ -190,19 +190,13 @@ def save_pipeline_output(settings):
     saveDir += (baseFileName +
                 '_' + settings[GENERAL][CORRECTION])
 
-    if settings[GENERAL][CORRECTION] == 'dbg_correction':
+    if settings[GENERAL][CORRECTION] in ['dbg_correction', 'bloocoo']:
 
-        saveDir += '_' + str(settings[DBG_CORRECTION][KMER_SIZE_BCALM])
-        saveDir += '_' + str(settings[DBG_CORRECTION][ABUNDANCE_BCALM])
-        saveDir += '_' + str(settings[DBG_CORRECTION][KMER_SIZE_BGREAT])
-        saveDir += '_' + str(settings[DBG_CORRECTION][ABUNDANCE_BGREAT])
-
-    elif settings[GENERAL][CORRECTION] == 'bloocoo':
-        saveDir += '_' + str(settings[BLOOCOO][KMER_SIZE])
-        saveDir += '_' + str(settings[BLOOCOO][ABUNDANCE])
+        saveDir += '_' + str(settings[GENERAL][KMER_SIZE])
+        saveDir += '_' + str(settings[GENERAL][ABUNDANCE])
 
     elif settings[GENERAL][CORRECTION] == 'musket':
-        saveDir += '_' + str(settings[MUSKET][KMER_SIZE])
+        saveDir += '_' + str(settings[GENERAL][KMER_SIZE])
 
     count = 1
     while os.path.isdir(saveDir + '_' + str(count)):
