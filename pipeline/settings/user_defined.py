@@ -59,8 +59,6 @@ def settings_parser(filePath):
     int_values = ['nTempFiles',
                   'nReadsToAdd',
                   'nThreads',
-                  'kmerSize',
-                  'abundanceThreshold',
                   'nMismatches',
                   'abundance',
                   'kmerSize']

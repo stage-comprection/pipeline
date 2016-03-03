@@ -9,7 +9,7 @@ abundance = 10
 kmerSize = [15, 21, 25, 31]
 
 
-def start_run(readsFile, refFile, tempFiles, abundanceBcalm, kmerSize):
+def start_run(readsFile, refFile, tempFiles, abundance, kmerSize):
 
     os.system('./run_pipeline.py' +
               ' -i ' + readsFile +

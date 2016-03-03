@@ -64,10 +64,10 @@ parser.add_argument('--correction', '-c', dest='general.correction',
                     help='Correction tool to be used')
 
 parser.add_argument('--kmerSize', dest='general.kmerSize',
-                    help='Kmer size to use in dbg_correction')
+                    help='Kmer size to use in correction')
 
-parser.add_argument('--abundance', dest='general.abundanceBcalm',
-                    help='Abundance threshold for bcalm')
+parser.add_argument('--abundance', dest='general.abundance',
+                    help='Abundance threshold for correction')
 
 parser.add_argument('--tempFiles', dest='evaluation.nTempFiles',
                     help='Number of temp files to generate for evaluation')
