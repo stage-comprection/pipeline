@@ -207,15 +207,15 @@ def save_pipeline_output(settings):
 
     os.makedirs(saveDir)
 
-    try:
-        shutil.copy(settings[GENERAL][OUTPUT_PATH] +
-                    settings[GENERAL][CORRECTED_FILE] +
-                    settings[DATA][READS_FILE],
-                    saveDir +
-                    settings[GENERAL][CORRECTED_FILE] +
-                    settings[DATA][READS_FILE])
-    except FileNotFoundError:
-        pass
+    # try:
+    #     shutil.copy(settings[GENERAL][OUTPUT_PATH] +
+    #                 settings[GENERAL][CORRECTED_FILE] +
+    #                 settings[DATA][READS_FILE],
+    #                 saveDir +
+    #                 settings[GENERAL][CORRECTED_FILE] +
+    #                 settings[DATA][READS_FILE])
+    # except FileNotFoundError:
+    #     pass
 
     try:
         shutil.copy(settings[GENERAL][OUTPUT_PATH] +
@@ -280,3 +280,5 @@ def save_pipeline_output(settings):
                     'correction_stats.txt')
     except FileNotFoundError:
         pass
+
+    os.rmdir(settings[GENERAL][OUTPUT_PATH])
