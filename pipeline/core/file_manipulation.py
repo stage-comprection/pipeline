@@ -281,4 +281,4 @@ def save_pipeline_output(settings):
     except FileNotFoundError:
         pass
 
-    os.rmdir(settings[GENERAL][OUTPUT_PATH])
+    shutil.rmtree(settings[GENERAL][OUTPUT_PATH])
