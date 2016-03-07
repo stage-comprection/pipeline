@@ -19,10 +19,7 @@ import os
 
 
 def to_bool(s):
-
-    """
-    Converts a string to a bool
-    """
+    """ Converts a string to a bool """
 
     acceptable = ['TRUE', 'True', 'true', 'T', 't', 'Y', 'y', '1']
 
@@ -33,7 +30,6 @@ def to_bool(s):
 
 
 def settings_parser(filePath):
-
     """
     Gets all user defined settings from settings.ini file
     Converts to int or bool when necessary
@@ -86,6 +82,7 @@ def settings_parser(filePath):
     return settings
 
 
+# Runs settings parser
 iniFilePath = "settings.ini"
 
 if not os.path.isfile(iniFilePath):

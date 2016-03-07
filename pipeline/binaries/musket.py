@@ -11,8 +11,8 @@ from ..settings import *
 import os
 
 
-# Corrects original reads using musket
 def musket(settings):
+    """ Corrects original reads using musket """
 
     # Runs musket binary with parameters from the pipeline's settings
     os.system(

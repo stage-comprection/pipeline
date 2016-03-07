@@ -13,8 +13,8 @@ from ..settings import *
 import os
 
 
-# Generates and index for bowtie from a reference file
 def bowtie_index(settings):
+    """ Generates and index for bowtie from a reference file """
 
     os.system(
               settings[BOWTIE][PATH] +
@@ -29,8 +29,8 @@ def bowtie_index(settings):
               )
 
 
-# Aligns a set of reads on a reference using bowtie
 def bowtie(settings):
+    """ Aligns a set of reads on a reference using bowtie """
 
     # Runs bowtie binary with parameters from the pipeline's settings
     if not os.path.isfile(settings[GENERAL][OUTPUT_PATH] +

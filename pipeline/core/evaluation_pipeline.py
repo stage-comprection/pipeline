@@ -33,36 +33,47 @@ def evaluation_pipeline(settings):
         fm.create_output_directory(settings)
 
         # Formats reads and reference files for easier use
-        if settings[GENERAL][CLEANUP_MODE] == 'T':
-            print('\n\n - Formatting reference file (',
-                  settings[DATA][REF_FILE], ')')
-            fm.format_reference_file(settings)
-            print('\n\n - Formatting reads file (',
-                  settings[DATA][READS_FILE], ')')
-            fm.format_reads_file(settings)
+        print('\n\n - Formatting reference file: ',
+              settings[DATA][REF_FILE])
+        fm.format_data_file(settings, 'reference')
+
+        print('\n\n - Formatting reads file: ',
+              settings[DATA][READS_FILE])
+        fm.format_data_file(settings, 'reads')
 
         # Corrects reads file after checking if a corrected file already exists
         if not os.path.isfile(settings[GENERAL][OUTPUT_PATH] +
                               settings[GENERAL][CORRECTED_FILE] +
                               settings[DATA][READS_FILE]):
+
             print('\n\n - Correcting reads file with ',
                   settings[GENERAL][CORRECTION])
+
             if settings[GENERAL][CORRECTION] == 'musket':
                 binaries.musket(settings)
+
             elif settings[GENERAL][CORRECTION] == 'bloocoo':
                 binaries.bloocoo(settings)
+
             elif settings[GENERAL][CORRECTION] == 'dbg_correction':
                 binaries.dbg_correction(settings)
+
         else:
             print('\n\n - Found a corrected reads file, skipping correction')
 
         # Generates an index from the reference for alignemnt with bowtie
-        print('\n\n - Generating bowtie index')
-        binaries.bowtie_index(settings)
+        if not os.path.isfile(settings[GENERAL][OUTPUT_PATH] +
+                              settings[BOWTIE][INDEX_FILE]):
+
+            print('\n\n - Generating bowtie index')
+            binaries.bowtie_index(settings)
 
         # Aligns reads on reference using bowtie
-        print('\n\n - Running bowtie on original reads')
-        binaries.bowtie(settings)
+        if not os.path.isfile(settings[GENERAL][OUTPUT_PATH] +
+                              settings[BOWTIE][OUTPUT_FILE]):
+
+            print('\n\n - Running bowtie on original reads')
+            binaries.bowtie(settings)
 
         print('\n\n')
 

@@ -7,6 +7,7 @@ Organisation of the settings dictionary (with const name in brackets):
 settings:
 
     - general (GENERAL):
+        - baseDir = current directory (base dir of pipeline)
         - outputPath (OUTPUT_PATH) = path to output directory
         - correction (CORRECTION) = correction tool
         - correctedFile (CORRECTED_FILE) = corrected file name
@@ -14,8 +15,10 @@ settings:
         - savePath (SAVE_PATH) = path to save directory
         - nThreads (N_THREADS) = number of available threads
         - evaluationMode (EVALUATION) = bool (True: only evaluation)
-        - cleanup (CLEANUP_MODE) = 1: All but bowtie 2: All 3: Restore data bk
+        - cleanup (CLEANUP_MODE) = T/F remove output dir and restore data
         - nReadsToAdd (N_READS_TO_ADD) = make a small test file of size n
+        - kmerSize (KMER_SIZE) = kmer size for correction
+        - abundance (ABUNDANCE) = abundance threshold for a good kmer
 
     - data (DATA):
         - readsPath (READS_PATH) = path to reads directory
@@ -26,23 +29,17 @@ settings:
     - bowtie (BOWTIE):
         - path (PATH) = path to directory containing bowtie binary
         - output_file (OUTPUT_FILE) = name of output file for bowtie
+        - index_file = name of the index file used for alignment
         - nMismatches (N_MISMATCHES) = number of allowed mismatches
 
     - bloocoo (BLOOCOO):
         - path (PATH) = path to directory containing bloocoo binary
-        - kmerSize (KMER_SIZE) = kmer size for bloocoo
-        - abundanceThreshold (ABUNDANCE) = abundance threshold for a good kmer
 
     - musket (MUSKET):
         - path (PATH) = path to directory containing musket binary
-        - kmerSize (KMER_SIZE) = kmer size for musket
 
     - dbg_correction (DBG_CORRECTION):
         - path (PATH) = path to directory containing dbg_correction binary
-        - kmerSizeBcalm (KMER_SIZE_BCALM) = size of kmer for bcalm
-        - kmerSizeBgreat (KMER_SIZE_BGREAT) = size of kmer for bgreat
-        - abundanceThresholdBcalm (ABUNDANCE_BCALM) = abundance bcalm
-        - abundanceThresholdBgreat (ABUNDANCE_BGREAT) = abundance bgreat
         - settingsFile (SETTINGS_FILE) = name of settings file (.ini)
         - pathToBcalm (BCALM_PATH) = path to bcalm binary
         - pathToBgreat (BGREAT_PATH) = path to bgreat binary
@@ -65,7 +62,7 @@ from . import command_line
 from . import user_defined
 from . import defaults
 from collections import ChainMap
-import os
+# import os
 
 
 def merge_settings_sources():
@@ -104,27 +101,31 @@ def update_output_path():
     Format : READSFILE_CORRECTION_PARAMETERS_COUNT
     """
 
-    outputDir = settings[GENERAL][OUTPUT_PATH]
-    baseFileName = settings[DATA][READS_FILE].replace('.fasta', '')
-    outputDir += (baseFileName +
-                  '_' + settings[GENERAL][CORRECTION])
+    # outputDir = settings[GENERAL][OUTPUT_PATH]
+    # baseFileName = settings[DATA][READS_FILE].replace('.fasta', '')
+    # outputDir += (baseFileName +
+    #               '_' + settings[GENERAL][CORRECTION])
 
-    if settings[GENERAL][CORRECTION] in ['dbg_correction', 'bloocoo']:
+    # if settings[GENERAL][CORRECTION] in ['dbg_correction', 'bloocoo']:
 
-        outputDir += '_' + str(settings[GENERAL][KMER_SIZE])
-        outputDir += '_' + str(settings[GENERAL][ABUNDANCE])
+    #     outputDir += '_' + str(settings[GENERAL][KMER_SIZE])
+    #     outputDir += '_' + str(settings[GENERAL][ABUNDANCE])
 
-    elif settings[GENERAL][CORRECTION] == 'musket':
-        outputDir += '_' + str(settings[GENERAL][KMER_SIZE])
+    # elif settings[GENERAL][CORRECTION] == 'musket':
+    #     outputDir += '_' + str(settings[GENERAL][KMER_SIZE])
 
-    count = 0
-    while os.path.isdir(outputDir + '_' + str(count)):
-        count += 1
+    # count = 0
+    # while os.path.isdir(outputDir + '_' + str(count)):
+    #     count += 1
 
-    outputDir += '_' + str(count)
-    outputDir += '/'
-    settings[GENERAL][OUTPUT_PATH] = outputDir
+    # outputDir += '_' + str(count)
+    # outputDir += '/'
+    # settings[GENERAL][OUTPUT_PATH] = outputDir
+
+    dirName = settings[DATA][READS_FILE].replace('.fasta', '') + '/'
+    settings[GENERAL][OUTPUT_PATH] += dirName
 
 
+# Merges settings from all sources into one directory and updates output path
 settings = merge_settings_sources()
 update_output_path()

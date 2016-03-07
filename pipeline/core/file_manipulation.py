@@ -14,22 +14,39 @@ import os
 import shutil
 
 
-# Cleanup pipeline's files (reads and reference):
+# def cleanup_files(settings):
+#     """
+#     Cleanup pipeline's files (reads and reference)
+#     """
+
+#     if settings[GENERAL][CLEANUP_MODE] == 'T':
+#         restore_data_file(settings, 'reference')
+#         restore_reads_file(settings, 'reads')
+
+
 def cleanup_files(settings):
+    """ Cleanup pipeline's files (reads and reference) """
 
     if settings[GENERAL][CLEANUP_MODE] == 'T':
-        restore_reference_file(settings)
-        restore_reads_file(settings)
+        restore_data_file(settings, 'reference')
+        restore_data_file(settings, 'reads')
+
+        if os.path.isdir(settings[GENERAL][OUTPUT_PATH]):
+            shutil.rmtree(settings[GENERAL][OUTPUT_PATH])
 
 
-# Creates the output directory
 def create_output_directory(settings):
+    """ Creates the output directory """
 
-    os.makedirs(settings[GENERAL][OUTPUT_PATH])
+    if not os.path.isdir(settings[GENERAL][OUTPUT_PATH]):
+        os.makedirs(settings[GENERAL][OUTPUT_PATH])
+
+    else:
+        print(' (skipped)')
 
 
-# Creates a reads file which is a subset of the original reads file
 def generate_small_reads_file(settings):
+    """ Creates a reads file which is a subset of the original reads file """
 
     size = settings[GENERAL][N_READS_TO_ADD]
     name = 'test_' + str(settings[GENERAL][N_READS_TO_ADD]) + '.fasta'
@@ -40,92 +57,102 @@ def generate_small_reads_file(settings):
                 g.write(f.readline())
 
 
-# Formats the original reads file in the following format :
-# - Read ID : number of the read (by occurence)
-# - Sequence one one line regardless of size
-def format_reads_file(settings):
+def format_data_file(settings, f):
+    """
+    Formats the original reads file in the following format :
+      - Read ID : number of the read (by occurence)
+      - Sequence one one line regardless of size
+    Formats the reference file with '0' as ID and sequence on one line
+    """
 
-    if not os.path.isfile(settings[DATA][READS_PATH] +
-                          settings[DATA][READS_FILE] +
-                          '.backup'):
+    if f == 'reads':
+        filePath = READS_PATH
+        fileName = READS_FILE
+        keepN = 'F'
+    elif f == 'reference':
+        filePath = REF_PATH
+        fileName = REF_FILE
+        keepN = 'T'
+    else:
+        print('Invalid file to be formatted')
 
-        os.rename(settings[DATA][READS_PATH] +
-                  settings[DATA][READS_FILE],
-                  settings[DATA][READS_PATH] +
-                  settings[DATA][READS_FILE] +
-                  '.backup')
+    if settings[GENERAL][CLEANUP_MODE] == 'T':
 
-    os.system(settings[FORMAT_READS][PATH] +
-              'format_reads_file ' +
-              settings[DATA][READS_PATH] +
-              settings[DATA][READS_FILE])
+        if not os.path.isfile(settings[DATA][filePath] +
+                              settings[DATA][fileName] +
+                              '.backup'):
+
+            os.rename(settings[DATA][filePath] +
+                      settings[DATA][fileName],
+                      settings[DATA][filePath] +
+                      settings[DATA][fileName] +
+                      '.backup')
+
+        os.system(settings[FORMAT_READS][PATH] +
+                  'format_reads_file ' +
+                  settings[DATA][filePath] +
+                  settings[DATA][fileName] +
+                  ' ' +
+                  keepN)
+
+    else:
+
+        if not os.path.isfile(settings[DATA][filePath] +
+                              settings[DATA][fileName] +
+                              '.backup'):
+
+            os.rename(settings[DATA][filePath] +
+                      settings[DATA][fileName],
+                      settings[DATA][filePath] +
+                      settings[DATA][fileName] +
+                      '.backup')
+
+        if not os.path.isfile(settings[DATA][filePath] +
+                              settings[DATA][fileName]):
+
+            os.system(settings[FORMAT_READS][PATH] +
+                      'format_reads_file ' +
+                      settings[DATA][filePath] +
+                      settings[DATA][fileName] +
+                      ' ' +
+                      keepN)
+
+        else:
+            print(' (skipped)')
 
 
-# Formats the reference file with '0' as ID and sequence on one line
-def format_reference_file(settings):
+def restore_data_file(settings, f):
+    """ Restores a data file from backup """
 
-    if not os.path.isfile(settings[DATA][REF_PATH] +
-                          settings[DATA][REF_FILE] +
-                          '.backup'):
+    if f == 'reads':
+        filePath = READS_PATH
+        fileName = READS_FILE
+    elif f == 'reference':
+        filePath = REF_PATH
+        fileName = REF_FILE
+    else:
+        print('Invalid file to be formatted')
 
-        os.rename(settings[DATA][REF_PATH] +
-                  settings[DATA][REF_FILE],
-                  settings[DATA][REF_PATH] +
-                  settings[DATA][REF_FILE] +
-                  '.backup')
-
-        with open(settings[DATA][REF_PATH] +
-                  settings[DATA][REF_FILE] +
-                  '.backup') as f:
-            with open(settings[DATA][REF_PATH] +
-                      settings[DATA][REF_FILE], 'w') as o:
-                f.readline()
-                o.write(">0\n")
-                for line in f:
-                    o.write(line.strip())
-
-
-# Restores reads file from backup
-def restore_reads_file(settings):
-
-    if os.path.isfile(settings[DATA][READS_PATH] +
-                      settings[DATA][READS_FILE] +
+    if os.path.isfile(settings[DATA][filePath] +
+                      settings[DATA][fileName] +
                       '.backup'):
-        if os.path.isfile(settings[DATA][READS_PATH] +
-                          settings[DATA][READS_FILE]):
+        if os.path.isfile(settings[DATA][filePath] +
+                          settings[DATA][fileName]):
 
-            os.remove(settings[DATA][READS_PATH] +
-                      settings[DATA][READS_FILE])
+            os.remove(settings[DATA][filePath] +
+                      settings[DATA][fileName])
 
-        os.rename(settings[DATA][READS_PATH] +
-                  settings[DATA][READS_FILE] +
+        os.rename(settings[DATA][filePath] +
+                  settings[DATA][fileName] +
                   '.backup',
-                  settings[DATA][READS_PATH] +
-                  settings[DATA][READS_FILE])
+                  settings[DATA][filePath] +
+                  settings[DATA][fileName])
 
 
-# Restores reference file from backup
-def restore_reference_file(settings):
-
-    if os.path.isfile(settings[DATA][REF_PATH] +
-                      settings[DATA][REF_FILE] +
-                      '.backup'):
-
-        if os.path.isfile(settings[DATA][REF_PATH] +
-                          settings[DATA][REF_FILE]):
-
-            os.remove(settings[DATA][REF_PATH] +
-                      settings[DATA][REF_FILE])
-
-        os.rename(settings[DATA][REF_PATH] +
-                  settings[DATA][REF_FILE] +
-                  '.backup',
-                  settings[DATA][REF_PATH] +
-                  settings[DATA][REF_FILE])
-
-
-# Generates a stats file
 def generate_stats_file(settings):
+    """
+    Generates a stats file for correction step (when using dbg correction)
+    """
 
     bgreat = open(settings[GENERAL][OUTPUT_PATH] +
                   'logs_bgreat.txt')
@@ -167,8 +194,8 @@ def generate_stats_file(settings):
     bowtie.close()
 
 
-# Prints a copy of all settings in a file
 def print_settings_file(settings):
+    """ Prints a copy of all settings in a file to be saved """
 
     with open(settings[GENERAL][OUTPUT_PATH] +
               settings[GENERAL][SETTINGS_FILE], 'w') as o:
@@ -182,8 +209,12 @@ def print_settings_file(settings):
             o.write('\n')
 
 
-# Saves a copy of important files at the end of the run
 def save_pipeline_output(settings):
+    """
+    Saves a copy of important files at the end of the run and
+    remove the output directory (necessary on the cluster because of
+    space constraints)
+    """
 
     saveDir = (settings[GENERAL][SAVE_PATH])
     baseFileName = settings[DATA][READS_FILE].replace('.fasta', '')
@@ -281,4 +312,4 @@ def save_pipeline_output(settings):
     except FileNotFoundError:
         pass
 
-    shutil.rmtree(settings[GENERAL][OUTPUT_PATH])
+    # shutil.rmtree(settings[GENERAL][OUTPUT_PATH])

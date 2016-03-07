@@ -7,9 +7,11 @@ from ..settings import *
 import os
 
 
-# Generates an .ini file used by the DBG correction pipeline to initialize
-# parameter values.
 def generate_settings_file(settings):
+    """
+    Generates an .ini file used by the DBG correction pipeline to initialize
+    parameter values.
+    """
 
     pathToSettingsFile = (settings[GENERAL][OUTPUT_PATH] +
                           settings[DBG_CORRECTION][SETTINGS_FILE])
@@ -42,8 +44,8 @@ def generate_settings_file(settings):
                 str(settings[BOWTIE][N_MISMATCHES]) + "\n")
 
 
-# Corrects original reads using dbg_correction
 def dbg_correction(settings):
+    """ Corrects original reads using dbg_correction """
 
     # Generates the settings file used by dbg_correction
     generate_settings_file(settings)

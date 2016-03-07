@@ -11,8 +11,8 @@ from ..settings import *
 import os
 
 
-# Corrects original reads using bloocoo
 def bloocoo(settings):
+    """Corrects original reads using bloocoo """
 
     # Runs bloocoo binary with parameters from the pipeline's settings
     os.system(

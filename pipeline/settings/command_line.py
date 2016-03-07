@@ -6,9 +6,11 @@ Check settings.py for a description of each parameter
 import argparse
 
 
-# Check if some arguments were not entered (value = None)
-# so they don't override default settings (in settings.py)
 def formatParser(dictionary):
+    """
+    Check if some arguments were not entered (value = None)
+    so they don't override default settings (in settings.py)
+    """
 
     general = dict()
     data = dict()

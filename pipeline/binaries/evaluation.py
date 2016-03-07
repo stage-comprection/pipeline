@@ -7,9 +7,11 @@ from ..settings import *
 import os
 
 
-# Generates an .ini file used by the evaluation pipeline to initialize
-# parameter values.
 def generate_settings_file(settings):
+    """
+    Generates an .ini file used by the evaluation pipeline to initialize
+    parameter values.
+    """
 
     pathToSettingsFile = (settings[GENERAL][OUTPUT_PATH] +
                           settings[EVALUATION][SETTINGS_FILE])
@@ -32,8 +34,8 @@ def generate_settings_file(settings):
                 str(settings[EVALUATION][N_TEMP_FILES]) + "\n")
 
 
-# Evaluates the results of correction using the evaluation pipeline
 def evaluation(settings):
+    """Evaluates the results of correction using the evaluation pipeline """
 
     # Generates the settings file used by the evaluation pipeline
     generate_settings_file(settings)
