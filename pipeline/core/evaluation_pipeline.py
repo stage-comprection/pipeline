@@ -71,7 +71,8 @@ def evaluation_pipeline(settings):
     binaries.evaluation(settings)
 
     # Generates stats file (correction stats from log files)
-    fm.generate_stats_file(settings)
+    if settings[GENERAL][CORRECTION] == 'dbg_correction':
+        fm.generate_stats_file(settings)
 
     # Writes a copy of all settings in a file
     fm.print_settings_file(settings)
