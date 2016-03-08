@@ -60,6 +60,8 @@ def settings_parser(filePath):
                   'kmerSize']
 
     bool_values = ['cleanup',
+                   'fullCleanup',
+                   'restoreFiles',
                    'evaluationMode']
 
     # Parsing of all lines in the file and conversion when necessary

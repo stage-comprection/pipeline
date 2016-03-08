@@ -56,7 +56,13 @@ parser.add_argument('--evaluationOnly', '-e', dest='general.evaluationMode',
                     help='Perform evaluation only (T / F)')
 
 parser.add_argument('--cleanup', '-u', dest='general.cleanup',
-                    help='Cleanup mode  (T / F)')
+                    help='Cleanup mode (T / F) - remove corrected file')
+
+parser.add_argument('--fullCleanup', dest='general.fullCleanup',
+                    help='Full cleanup mode (T / F) - remove output dir')
+
+parser.add_argument('--restoreFiles', '-r', dest='general.restoreFiles',
+                    help='Restore data files (T / F)')
 
 parser.add_argument('--smallFile', '-s', dest='general.nReadsToAdd',
                     help='Number of reads to add to test file' +

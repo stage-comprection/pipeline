@@ -3,7 +3,7 @@ import os
 readsFile = ['SRR065390.fasta']
 refFile = ['celegans.fasta']
 correction = ['dbg_correction', 'bloocoo', 'musket']
-abundance = [15]
+abundance = [15, 20, 30, 40]
 kmerSize = [31]
 tempFiles = 20
 
@@ -14,7 +14,8 @@ def start_run(reads, ref, c, temp, a, k):
                ' -i ' + reads +
                ' -f ' + ref +
                ' -c ' + c +
-               ' --tempFiles ' + str(temp)
+               ' --tempFiles ' + str(temp) +
+               ' -u T'
                )
 
     if c == 'dbg_correction':

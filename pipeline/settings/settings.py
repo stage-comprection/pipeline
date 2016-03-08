@@ -15,7 +15,9 @@ settings:
         - savePath (SAVE_PATH) = path to save directory
         - nThreads (N_THREADS) = number of available threads
         - evaluationMode (EVALUATION) = bool (True: only evaluation)
-        - cleanup (CLEANUP_MODE) = T/F remove output dir and restore data
+        - cleanup (CLEANUP_MODE) = T/F remove corrected files
+        - fullCleanup (FULL_CLEANUP) = T/F remove output dir
+        - restoreFiles (RESTORE_FILES) = T/F restore data files
         - nReadsToAdd (N_READS_TO_ADD) = make a small test file of size n
         - kmerSize (KMER_SIZE) = kmer size for correction
         - abundance (ABUNDANCE) = abundance threshold for a good kmer

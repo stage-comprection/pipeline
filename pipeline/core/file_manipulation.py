@@ -27,10 +27,15 @@ import shutil
 def cleanup_files(settings):
     """ Cleanup pipeline's files (reads and reference) """
 
-    if settings[GENERAL][CLEANUP_MODE] == 'T':
+    if settings[GENERAL][RESTORE_FILES] == 'T':
         restore_data_file(settings, 'reference')
         restore_data_file(settings, 'reads')
 
+    if settings[GENERAL][CLEANUP_MODE] == 'T':
+        if os.path.isfile(settings[GENERAL][CORRECTED_FILE]):
+            os.remove(settings[GENERAL][CORRECTED_FILE])
+
+    if settings[GENERAL][FULL_CLEANUP] == 'T':
         if os.path.isdir(settings[GENERAL][OUTPUT_PATH]):
             shutil.rmtree(settings[GENERAL][OUTPUT_PATH])
 
@@ -76,7 +81,7 @@ def format_data_file(settings, f):
     else:
         print('Invalid file to be formatted')
 
-    if settings[GENERAL][CLEANUP_MODE] == 'T':
+    if settings[GENERAL][RESTORE_FILES] == 'T':
 
         if not os.path.isfile(settings[DATA][filePath] +
                               settings[DATA][fileName] +
