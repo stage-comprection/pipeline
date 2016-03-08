@@ -161,18 +161,24 @@ def generate_stats_file(settings):
     output = open(settings[GENERAL][OUTPUT_PATH] +
                   'correction_stats.txt', 'w')
 
+    nReads = -1
+    nNotOverlap = -1
+    nOverlap = -1
+    nOverlapAligned = -1
+    nOverlapNotAligned = -1
+    nAligned = -1
+    nUnaligned = -1
+
     for line in bgreat:
-        if line.startswith('Number of unitig'):
-            nUnitigs = line.split(': ')[1].strip('\n')
-        elif line.startswith('Read'):
+        if line.startswith('Reads :'):
             nReads = line.split(' : ')[1].strip('\n')
-        elif line.startswith('No Overlap'):
+        elif line.startswith('No overlap'):
             nNotOverlap = line.split(' : ')[1].split(' ')[0].strip('\n')
-        elif line.startswith('Got Overlap'):
+        elif line.startswith('Got overlap'):
             nOverlap = line.split(' : ')[1].split(' ')[0].strip('\n')
-        elif line.startswith('Overlap and Aligned'):
+        elif line.startswith('Overlap and aligned'):
             nOverlapAligned = line.split(' : ')[1].split(' ')[0].strip('\n')
-        elif line.startswith('Overlap but no aligne'):
+        elif line.startswith('Overlap but not aligned'):
             nOverlapNotAligned = line.split(' : ')[1].split(' ')[0].strip('\n')
 
     for line in bowtie:
@@ -181,11 +187,11 @@ def generate_stats_file(settings):
         elif line.startswith('# reads that failed to align'):
             nUnaligned = line.split(': ')[1].split(' ')[0].strip('\n')
 
-    output.write('nUnitigs' + '\t' + 'nReads' + '\t' + 'nNotOverlap' + '\t' +
+    output.write('nReads' + '\t' + 'nNotOverlap' + '\t' +
                  'nOverlap' + '\t' + 'nOverlapAligned' + '\t' +
                  'nOverlapNotAligned' + '\t' + 'nAligned' + '\t' +
                  'nUnaligned' + '\n')
-    output.write(nUnitigs + '\t' + nReads + '\t' + nNotOverlap + '\t' +
+    output.write(nReads + '\t' + nNotOverlap + '\t' +
                  nOverlap + '\t' + nOverlapAligned + '\t' +
                  nOverlapNotAligned + '\t' + nAligned + '\t' + nUnaligned)
 
