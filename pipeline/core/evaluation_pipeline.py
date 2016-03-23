@@ -62,17 +62,17 @@ def evaluation_pipeline(settings):
 
         # Generates an index from the reference for alignemnt with bowtie
         if not os.path.isfile(settings[GENERAL][OUTPUT_PATH] +
-                              settings[BOWTIE][INDEX_FILE]):
+                              settings[GENERAL][ALIGNER_INDEX_FILE]):
 
             print('\n\n - Generating bowtie index')
-            binaries.bowtie_index(settings)
+            binaries.bwa_index(settings)
 
         # Aligns reads on reference using bowtie
         if not os.path.isfile(settings[GENERAL][OUTPUT_PATH] +
-                              settings[BOWTIE][OUTPUT_FILE]):
+                              settings[GENERAL][ALIGNER_FILE]):
 
             print('\n\n - Running bowtie on original reads')
-            binaries.bowtie(settings)
+            binaries.bwa(settings)
 
         print('\n\n')
 

@@ -23,7 +23,7 @@ def bowtie_index(settings):
               settings[DATA][REF_FILE] +
               ' ' +
               settings[GENERAL][OUTPUT_PATH] +
-              settings[BOWTIE][INDEX_FILE] +
+              settings[GENERAL][ALIGNER_INDEX_FILE] +
               settings[DATA][READS_FILE].replace('.fasta', '') +
               ' 2>/dev/null'
               )
@@ -34,7 +34,7 @@ def bowtie(settings):
 
     # Runs bowtie binary with parameters from the pipeline's settings
     if not os.path.isfile(settings[GENERAL][OUTPUT_PATH] +
-                          settings[BOWTIE][OUTPUT_FILE] +
+                          settings[GENERAL][ALIGNER_FILE] +
                           settings[DATA][READS_FILE].replace('.fasta', '')):
         os.system(
                   settings[BOWTIE][PATH] +
@@ -44,7 +44,7 @@ def bowtie(settings):
                   str(settings[GENERAL][N_THREADS]) +
                   ' ' +
                   settings[GENERAL][OUTPUT_PATH] +
-                  settings[BOWTIE][INDEX_FILE] +
+                  settings[GENERAL][ALIGNER_INDEX_FILE] +
                   settings[DATA][READS_FILE].replace('.fasta', '') +
                   ' ' +
                   settings[DATA][READS_PATH] +
@@ -56,9 +56,8 @@ def bowtie(settings):
                   settings[DATA][REF_FILE] +
                   " true " +
                   settings[GENERAL][OUTPUT_PATH] +
-                  settings[BOWTIE][OUTPUT_FILE] +
+                  settings[GENERAL][ALIGNER_FILE] +
                   settings[DATA][READS_FILE].replace('.fasta', '')
                   )
     else:
-        print('\n    Found a SAM output file, skipping alignment' +
-              '(use --cleanup 2 or 3 to generate a new alignment file)')
+        print('\n    Found a SAM output file, skipping alignment')

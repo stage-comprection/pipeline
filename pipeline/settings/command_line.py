@@ -16,11 +16,13 @@ def formatParser(dictionary):
     data = dict()
     dbg_correction = dict()
     evaluation = dict()
+    bowtie2 = dict()
 
     o_dict = {'general': general,
               'data': data,
               'dbg_correction': dbg_correction,
-              'evaluation': evaluation
+              'evaluation': evaluation,
+              'bowtie2': bowtie2
               }
 
     for k, v in dictionary.items():
@@ -64,7 +66,10 @@ parser.add_argument('--fullCleanup', dest='general.fullCleanup',
 parser.add_argument('--restoreFiles', '-r', dest='general.restoreFiles',
                     help='Restore data files (T / F)')
 
-parser.add_argument('--smallFile', '-s', dest='general.nReadsToAdd',
+parser.add_argument('--saveCorrected', '-s', dest='general.saveCorrected',
+                    help='Saves corrected reads files (T / F)')
+
+parser.add_argument('--smallFile', '-m', dest='general.nReadsToAdd',
                     help='Number of reads to add to test file' +
                     ' (if 0, no test file is made)')
 
@@ -79,6 +84,12 @@ parser.add_argument('--abundance', dest='general.abundance',
 
 parser.add_argument('--tempFiles', dest='evaluation.nTempFiles',
                     help='Number of temp files to generate for evaluation')
+
+parser.add_argument('--bowtieMode', dest='bowtie2.mode',
+                    help='Mode to use for bowtie2')
+
+parser.add_argument('--dbgAligner', dest='dbg_correction.aligner',
+                    help='Aligner to use in DBG correction')
 
 
 # Get settings values from command line options

@@ -26,6 +26,10 @@ def generate_settings_file(settings):
                 settings[DBG_CORRECTION][BCALM_PATH] + "\n")
         o.write("bowtiePath=" +
                 settings[BOWTIE][PATH] + "\n")
+        o.write("bowtie2Path=" +
+                settings[BOWTIE2][PATH] + "\n")
+        o.write("bwaPath=" +
+                settings[BWA][PATH] + "\n")
         o.write("bgreatPath=" +
                 settings[DBG_CORRECTION][BGREAT_PATH] + "\n")
         o.write("bowtieParserPath=" +
@@ -42,6 +46,8 @@ def generate_settings_file(settings):
                 str(settings[GENERAL][N_THREADS]) + "\n")
         o.write("nMismatchesBowtie=" +
                 str(settings[BOWTIE][N_MISMATCHES]) + "\n")
+        o.write("aligner=" +
+                str(settings[DBG_CORRECTION][ALIGNER]) + "\n")
 
 
 def dbg_correction(settings):

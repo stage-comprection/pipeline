@@ -8,6 +8,8 @@ BASEDIR = 'baseDir'
 GENERAL = 'general'
 DATA = 'data'
 BOWTIE = 'bowtie'
+BOWTIE2 = 'bowtie2'
+BWA = 'bwa'
 BLOOCOO = 'bloocoo'
 MUSKET = 'musket'
 DBG_CORRECTION = 'dbg_correction'
@@ -25,12 +27,15 @@ OUTPUT_FILE = 'output_file'
 OUTPUT_PATH = 'outputPath'
 CORRECTION = 'correction'
 CORRECTED_FILE = 'correctedFile'
+ALIGNER_FILE = 'alignerFile'
+ALIGNER_INDEX_FILE = 'alignerIndexFile'
 SAVE_PATH = 'savePath'
 N_THREADS = 'nThreads'
 ANALYSES_MODE = 'analysesMode'
 CLEANUP_MODE = 'cleanup'
 FULL_CLEANUP = 'fullCleanup'
 RESTORE_FILES = 'restoreFiles'
+SAVE_CORRECTED = 'saveCorrected'
 N_READS_TO_ADD = 'nReadsToAdd'
 KMER_SIZE = 'kmerSize'
 ABUNDANCE = 'abundance'
@@ -41,13 +46,15 @@ REF_PATH = 'refPath'
 READS_FILE = 'readsFile'
 REF_FILE = 'refFile'
 
-# Bowtie
+# Bowtie / Bowtie 2
 N_MISMATCHES = 'nMismatches'
-INDEX_FILE = 'index_file'
+MODE = 'mode'
+
 
 # DBG correction
 BCALM_PATH = 'pathToBcalm'
 BGREAT_PATH = 'pathToBgreat'
+ALIGNER = 'aligner'
 
 # Evaluation
 N_TEMP_FILES = 'nTempFiles'

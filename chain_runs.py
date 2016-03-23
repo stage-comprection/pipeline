@@ -1,10 +1,10 @@
 import os
 
-readsFile = ['SRR065390.fasta']
-refFile = ['celegans.fasta']
-correction = ['dbg_correction', 'bloocoo', 'musket']
-abundance = [15, 20, 30, 40]
-kmerSize = [31]
+readsFile = ['SRR959239.fasta']
+refFile = ['ecoli_k12.fasta']
+correction = ['dbg_correction']
+abundance = [3,5,7,9,11]
+kmerSize = [27,31]
 tempFiles = 20
 
 
@@ -14,8 +14,8 @@ def start_run(reads, ref, c, temp, a, k):
                ' -i ' + reads +
                ' -f ' + ref +
                ' -c ' + c +
-               ' --tempFiles ' + str(temp) +
-               ' -u T'
+	       ' -u T ' +
+               ' --tempFiles ' + str(temp)
                )
 
     if c == 'dbg_correction':
@@ -27,6 +27,9 @@ def start_run(reads, ref, c, temp, a, k):
 for read in readsFile:
     for ref in refFile:
         for c in correction:
-            for a in abundance:
-                for k in kmerSize:
-                    start_run(read, ref, c, tempFiles, a, k)
+	    if c == 'dbg_correction':
+		    for a in abundance:
+		        for k in kmerSize:
+		            start_run(read, ref, c, tempFiles, a, k)
+	    else:
+		start_run(read, ref, c, tempFiles, a, k)

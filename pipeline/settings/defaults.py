@@ -13,16 +13,20 @@ general = {'baseDir': os.getcwd(),
            'outputPath': '/home/rferon/project/output/',
            'correction': 'dbg_correction',
            'correctedFile': 'corrected_',
+           'alignerIndexFile': 'aligner_index_',
+           'alignerFile': 'aligner_',
            'settingsFile': 'settings.txt',
            'savePath': '/home/rferon/project/output/save/',
            'nThreads': 6,
            'evaluationMode': False,
            'cleanup': 'T',
-           'fullCleanup': 'T',
+           'fullCleanup': 'F',
            'restoreFiles': 'F',
+           'saveCorrected': 'F',
            'nReadsToAdd': 0,
            'kmerSize': 31,
-           'abundance': 5}
+           'abundance': 5,
+           }
 
 
 # Data parameters
@@ -34,9 +38,15 @@ data = {'readsPath': '/home/rferon/project/data/reads/',
 
 # Bowtie parameters
 bowtie = {'path': general['baseDir'] + '/ext/bowtie/',
-          'output_file': 'bowtie_',
-          'index_file': 'bowtie_index_',
           'nMismatches': 3}
+
+# Bowtie2 parameters
+bowtie2 = {'path': general['baseDir'] + '/ext/bowtie2/',
+           'mode': 'fast'}
+
+
+# BWA parameters
+bwa = {'path': general['baseDir'] + '/ext/bwa/'}
 
 
 # Bloocoo parameters
@@ -51,7 +61,8 @@ musket = {'path': general['baseDir'] + '/ext/musket/'}
 dbg_correction = {'path': general['baseDir'] + '/binaries/',
                   'settingsFile': 'correction_settings.ini',
                   'pathToBcalm': general['baseDir'] + '/ext/bcalm/',
-                  'pathToBgreat': general['baseDir'] + '/ext/bgreat/'}
+                  'pathToBgreat': general['baseDir'] + '/ext/bgreat/',
+                  'aligner': 'bowtie'}
 
 
 # Evaluation parameters
@@ -72,6 +83,8 @@ bowtie_parser = {'path': general['baseDir'] + '/binaries/'}
 settings = {'general': general,
             'data': data,
             'bowtie': bowtie,
+            'bowtie2': bowtie2,
+            'bwa': bwa,
             'bloocoo': bloocoo,
             'musket': musket,
             'dbg_correction': dbg_correction,

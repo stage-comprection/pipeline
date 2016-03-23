@@ -42,6 +42,8 @@ def settings_parser(filePath):
     settings = {'general': dict(),
                 'data': dict(),
                 'bowtie': dict(),
+                'bowtie2': dict(),
+                'bwa': dict(),
                 'bloocoo': dict(),
                 'musket': dict(),
                 'dbg_correction': dict(),
@@ -62,6 +64,7 @@ def settings_parser(filePath):
     bool_values = ['cleanup',
                    'fullCleanup',
                    'restoreFiles',
+                   'saveCorrected',
                    'evaluationMode']
 
     # Parsing of all lines in the file and conversion when necessary

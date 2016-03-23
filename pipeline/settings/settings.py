@@ -11,6 +11,8 @@ settings:
         - outputPath (OUTPUT_PATH) = path to output directory
         - correction (CORRECTION) = correction tool
         - correctedFile (CORRECTED_FILE) = corrected file name
+        - alignerFile (ALIGNER_FILE) = aligner output name
+        - alignerIndexFile (ALIGNER_INDEX_FILE) = aligner index file name
         - settingsFile (SETTINGS_FILE) = settings file name
         - savePath (SAVE_PATH) = path to save directory
         - nThreads (N_THREADS) = number of available threads
@@ -18,6 +20,7 @@ settings:
         - cleanup (CLEANUP_MODE) = T/F remove corrected files
         - fullCleanup (FULL_CLEANUP) = T/F remove output dir
         - restoreFiles (RESTORE_FILES) = T/F restore data files
+        - saveCorrected (SAVE_CORRECTED) = T/F save corrected reads file
         - nReadsToAdd (N_READS_TO_ADD) = make a small test file of size n
         - kmerSize (KMER_SIZE) = kmer size for correction
         - abundance (ABUNDANCE) = abundance threshold for a good kmer
@@ -30,9 +33,14 @@ settings:
 
     - bowtie (BOWTIE):
         - path (PATH) = path to directory containing bowtie binary
-        - output_file (OUTPUT_FILE) = name of output file for bowtie
-        - index_file = name of the index file used for alignment
         - nMismatches (N_MISMATCHES) = number of allowed mismatches
+
+    - bowtie2 (BOWTIE2):
+        - path (PATH) = path to directory containing bowtie2 binary
+        - mode = mode to use for bowtie2 (very fast, fast, sensitive, ...)
+
+    - bwa (BWA):
+        - path (PATH) = path to directory containing bwa binary
 
     - bloocoo (BLOOCOO):
         - path (PATH) = path to directory containing bloocoo binary
@@ -45,6 +53,7 @@ settings:
         - settingsFile (SETTINGS_FILE) = name of settings file (.ini)
         - pathToBcalm (BCALM_PATH) = path to bcalm binary
         - pathToBgreat (BGREAT_PATH) = path to bgreat binary
+        - aligner (ALIGNER) = aligner to use for non overlaping kmers
 
     - evaluation (EVALUATION):
         - path (PATH) = path to directory containing evaluation binary

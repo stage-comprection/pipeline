@@ -32,8 +32,14 @@ def cleanup_files(settings):
         restore_data_file(settings, 'reads')
 
     if settings[GENERAL][CLEANUP_MODE] == 'T':
-        if os.path.isfile(settings[GENERAL][CORRECTED_FILE]):
-            os.remove(settings[GENERAL][CORRECTED_FILE])
+
+        if os.path.isfile(settings[GENERAL][OUTPUT_PATH] +
+                          settings[GENERAL][CORRECTED_FILE] +
+                          settings[DATA][READS_FILE]):
+
+            os.remove(settings[GENERAL][OUTPUT_PATH] +
+                      settings[GENERAL][CORRECTED_FILE] +
+                      settings[DATA][READS_FILE])
 
     if settings[GENERAL][FULL_CLEANUP] == 'T':
         if os.path.isdir(settings[GENERAL][OUTPUT_PATH]):
@@ -249,15 +255,16 @@ def save_pipeline_output(settings):
 
     os.makedirs(saveDir)
 
-    # try:
-    #     shutil.copy(settings[GENERAL][OUTPUT_PATH] +
-    #                 settings[GENERAL][CORRECTED_FILE] +
-    #                 settings[DATA][READS_FILE],
-    #                 saveDir +
-    #                 settings[GENERAL][CORRECTED_FILE] +
-    #                 settings[DATA][READS_FILE])
-    # except FileNotFoundError:
-    #     pass
+    if settings[GENERAL][SAVE_CORRECTED] == 'T':
+        try:
+            shutil.copy(settings[GENERAL][OUTPUT_PATH] +
+                        settings[GENERAL][CORRECTED_FILE] +
+                        settings[DATA][READS_FILE],
+                        saveDir +
+                        settings[GENERAL][CORRECTED_FILE] +
+                        settings[DATA][READS_FILE])
+        except FileNotFoundError:
+            pass
 
     try:
         shutil.copy(settings[GENERAL][OUTPUT_PATH] +
